@@ -1,65 +1,100 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-b from-forest-50 to-cream-500 py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-display font-display text-forest-900 mb-6">
+              Sacred Portal Wellness
+            </h1>
+            <p className="text-h5 text-charcoal-700 mb-8">
+              Holistic wellness and yoni steaming for women's health
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/shop">
+                <Button size="lg">Shop Products</Button>
+              </Link>
+              <Link href="/coaching">
+                <Button size="lg" variant="outline">
+                  Learn About Coaching
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Introduction */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-h2 font-display text-center mb-8">
+              Welcome to Your Wellness Journey
+            </h2>
+            <div className="prose prose-lg mx-auto text-charcoal-700">
+              <p className="text-body-lg text-center">
+                Sacred Portal Wellness offers holistic yoni steaming products and personalized coaching 
+                to support your feminine wellness journey. Our products are carefully curated to honor 
+                your body's natural wisdom and healing capacity.
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Features */}
+      <section className="bg-cream-600 py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <h3 className="text-h4 font-display mb-4">Quality Products</h3>
+              <p className="text-body text-charcoal-700">
+                Carefully selected herbs and steaming supplies for your wellness practice
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-h4 font-display mb-4">Expert Guidance</h3>
+              <p className="text-body text-charcoal-700">
+                Professional coaching from a registered nurse with holistic certification
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-h4 font-display mb-4">Sacred Space</h3>
+              <p className="text-body text-charcoal-700">
+                A nurturing community supporting your feminine health journey
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-h2 font-display mb-6">
+              Ready to Begin?
+            </h2>
+            <p className="text-body-lg text-charcoal-700 mb-8">
+              Explore our products or learn more about personalized coaching programs
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/shop">
+                <Button size="lg">Browse Shop</Button>
+              </Link>
+              <Link href="/about">
+                <Button size="lg" variant="outline">
+                  Meet the Creator
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

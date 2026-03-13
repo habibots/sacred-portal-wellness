@@ -1,26 +1,69 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Colors - Brand */
+    --color-brand-primary: #1B5E20;
+    --color-brand-primary-hover: #2E7D32;
+    --color-brand-primary-active: #0D3D12;
+    --color-brand-secondary: #558B2F;
+    --color-brand-accent: #8BC34A;
+
+    /* Colors - Background */
+    --color-bg-primary: #FAF9F6;
+    --color-bg-secondary: #FFFFFF;
+    --color-bg-tertiary: #E8E6E0;
+    --color-bg-hover: #E8F5E9;
+    --color-bg-active: #C8E6C9;
+    --color-bg-disabled: #F2F2F2;
+    --color-bg-overlay: rgba(26, 26, 26, 0.6);
+
+    /* Colors - Text */
+    --color-text-primary: #2C2C2C;
+    --color-text-secondary: #595959;
+    --color-text-tertiary: #737373;
+    --color-text-inverse: #FFFFFF;
+    --color-text-link: #1B5E20;
+    --color-text-link-hover: #2E7D32;
+
+    /* Colors - Border */
+    --color-border-default: #BFBFBF;
+    --color-border-subtle: #D9D9D9;
+    --color-border-strong: #A6A6A6;
+    --color-border-focus: #1B5E20;
+    --color-border-error: #F44336;
+    --color-border-success: #4CAF50;
+  }
+
+  body {
+    @apply bg-cream-500 text-charcoal-800 font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-charcoal-900;
+  }
+
+  /* Ensure focus is always visible */
+  *:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
