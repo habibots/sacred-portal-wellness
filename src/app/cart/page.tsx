@@ -3,6 +3,7 @@
 import { useCart } from '@/lib/cart/context';
 import { Button } from '@/components/ui/button';
 import { formatPrice } from '@/lib/utils/format';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function CartPage() {
@@ -36,8 +37,20 @@ export default function CartPage() {
               key={`${item.productId}-${item.variantId}`}
               className="bg-white rounded-lg p-6 shadow-md flex gap-4"
             >
-              <div className="w-24 h-24 bg-cream-600 rounded-md flex-shrink-0 flex items-center justify-center">
-                <span className="text-charcoal-400 text-sm">Image</span>
+              <div className="w-24 h-24 bg-cream-600 rounded-md flex-shrink-0 overflow-hidden relative">
+                {item.image ? (
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    <span className="text-charcoal-400 text-sm">Image</span>
+                  </div>
+                )}
               </div>
 
               <div className="flex-1">
@@ -53,8 +66,9 @@ export default function CartPage() {
                         updateQuantity(item.productId, item.variantId, item.quantity - 1)
                       }
                       className="w-8 h-8 rounded-md border border-charcoal-300 hover:bg-charcoal-50"
+                      aria-label="Decrease quantity"
                     >
-                      −
+                      &minus;
                     </button>
                     <span className="w-12 text-center">{item.quantity}</span>
                     <button
@@ -62,6 +76,7 @@ export default function CartPage() {
                         updateQuantity(item.productId, item.variantId, item.quantity + 1)
                       }
                       className="w-8 h-8 rounded-md border border-charcoal-300 hover:bg-charcoal-50"
+                      aria-label="Increase quantity"
                     >
                       +
                     </button>

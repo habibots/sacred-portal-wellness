@@ -1,67 +1,58 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ProductGrid } from './product-grid';
 
 export const metadata = {
   title: 'Shop - Sacred Portal Wellness',
   description: 'Browse our collection of yoni steaming products and wellness items',
 };
 
-// Placeholder products until Square integration is complete
-const placeholderProducts = [
-  {
-    id: '1',
-    name: 'Yoni Steam Blend - Relaxation',
-    description: 'A calming blend of herbs for your yoni steaming practice',
-    price: 24.99,
-    image: '/images/placeholder.png',
-    inStock: true,
-  },
-  {
-    id: '2',
-    name: 'Yoni Steam Blend - Detox',
-    description: 'Cleansing herbs to support your wellness journey',
-    price: 24.99,
-    image: '/images/placeholder.png',
-    inStock: true,
-  },
-  {
-    id: '3',
-    name: 'Yoni Steam Seat',
-    description: 'Comfortable portable seat for your steaming practice',
-    price: 89.99,
-    image: '/images/placeholder.png',
-    inStock: true,
-  },
-];
+interface ProductFromAPI {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  images: string[];
+  category: string;
+  inStock: boolean;
+  slug: string;
+  variants: { id: string; name: string; price: number; inStock: boolean }[];
+}
 
-export default function ShopPage() {
+async function getProducts(): Promise<ProductFromAPI[]> {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  try {
+    const res = await fetch(`${baseUrl}/api/catalog`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.products || [];
+  } catch {
+    return [];
+  }
+}
+
+export default async function ShopPage() {
+  const products = await getProducts();
+
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-h1 font-display mb-8">Shop</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {placeholderProducts.map((product) => (
-          <Card key={product.id} className="h-full hover:shadow-lg transition-shadow">
-            <CardHeader className="p-0">
-              <div className="relative aspect-square bg-cream-600 rounded-t-lg flex items-center justify-center">
-                <span className="text-charcoal-400">Product Image</span>
-              </div>
-            </CardHeader>
-            <CardContent className="p-4">
-              <h3 className="text-h6 font-display mb-2">{product.name}</h3>
-              <p className="text-body-sm text-charcoal-600 line-clamp-2 mb-4">
-                {product.description}
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-h5 font-semibold text-forest-800">
-                  ${product.price.toFixed(2)}
-                </span>
-                <Button size="sm">Add to Cart</Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <h1 className="text-h1 font-display mb-4">Shop</h1>
+      <p className="text-body-lg text-charcoal-600 mb-8">
+        Carefully curated herbs and wellness products for your sacred practice
+      </p>
+
+      {products.length === 0 ? (
+        <div className="text-center py-16">
+          <p className="text-body-lg text-charcoal-500 mb-2">
+            Products are loading soon.
+          </p>
+          <p className="text-body text-charcoal-400">
+            Please check back shortly or contact us for product inquiries.
+          </p>
+        </div>
+      ) : (
+        <ProductGrid products={products} />
+      )}
     </div>
   );
 }
