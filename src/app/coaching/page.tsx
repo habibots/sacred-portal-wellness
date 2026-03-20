@@ -64,6 +64,42 @@ export default function CoachingPage() {
             </p>
           </section>
 
+          <section className="mb-8">
+            <h2 className="text-h3 font-display mb-6">Success Stories</h2>
+            <blockquote className="bg-cream-50 border border-charcoal-100 rounded-lg p-6 sm:p-8 relative">
+              <svg className="absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 text-forest-200" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983z" />
+              </svg>
+              <div className="pl-8 sm:pl-10 space-y-4">
+                <p className="text-body italic text-charcoal-800 leading-relaxed">
+                  &ldquo;Working with Amber as my nurse coach was a wonderful and unexpected experience.
+                  I initially questioned whether nurse coaching was something I truly needed, but I am so
+                  glad I decided to move forward and work with her. Amber is incredibly knowledgeable, and
+                  her background as a practicing nurse added so much value to our work together. Her expertise
+                  was especially helpful as I navigated some personal needs and challenges, and she consistently
+                  offered thoughtful guidance and practical advice.&rdquo;
+                </p>
+                <p className="text-body italic text-charcoal-800 leading-relaxed">
+                  &ldquo;She created a safe, comfortable space that made it easy to openly share my life
+                  experiences and struggles. Amber made the coaching process feel relaxed yet purposeful,
+                  allowing me the time and clarity to reflect on what I wanted to work through while guiding
+                  each session in an organized and professional way. She provided meaningful suggestions,
+                  shared excellent resources that aligned with my goals, and kept me accountable without ever
+                  being pushy. Some of her guidance helped me get back on schedule and create a healthy routine
+                  for me that is achievable. She also recommended some herbs and tinctures that have really
+                  supported my overall health that I am loving and so grateful to have in my routine.&rdquo;
+                </p>
+                <p className="text-body italic text-charcoal-800 leading-relaxed">
+                  &ldquo;You never truly know how impactful an experience can be until you give it a chance,
+                  and working with Amber was an incredibly positive way to close out 2025.&rdquo;
+                </p>
+              </div>
+              <cite className="block mt-6 pl-8 sm:pl-10 text-body-sm font-semibold text-charcoal-600 not-italic">
+                &mdash; R.S., Age 30
+              </cite>
+            </blockquote>
+          </section>
+
           <div className="text-center mt-12">
             <Link href="/contact">
               <Button size="lg">Schedule a Consultation</Button>
