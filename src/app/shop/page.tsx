@@ -1,32 +1,56 @@
 import { ProductGrid } from './product-grid';
+import squareClient from '@/lib/square/client';
+import type { CatalogObject } from 'square';
 
 export const metadata = {
   title: 'Shop - Sacred Portal Wellness',
   description: 'Browse our collection of yoni steaming products and wellness items',
 };
 
-interface ProductFromAPI {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  images: string[];
-  category: string;
-  inStock: boolean;
-  slug: string;
-  variants: { id: string; name: string; price: number; inStock: boolean }[];
-}
+export const dynamic = 'force-dynamic';
 
-async function getProducts(): Promise<ProductFromAPI[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+async function getProducts() {
   try {
-    const res = await fetch(`${baseUrl}/api/catalog`, {
-      next: { revalidate: 60 },
+    const response = await squareClient.catalog.searchItems({
+      enabledLocationIds: [process.env.SQUARE_LOCATION_ID || ''],
+      productTypes: ['REGULAR'],
     });
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data.products || [];
-  } catch {
+
+    const items = (response.items || []) as CatalogObject.Item[];
+
+    return items
+      .filter((item) => !item.itemData?.isArchived)
+      .map((item) => {
+        const data = item.itemData;
+        const variations = (data?.variations || []) as CatalogObject.ItemVariation[];
+        const firstVariation = variations[0];
+        const priceMoney = firstVariation?.itemVariationData?.priceMoney;
+        const images: string[] = data?.ecomImageUris || [];
+
+        return {
+          id: item.id,
+          name: data?.name || '',
+          description: data?.descriptionPlaintext || data?.description || '',
+          price: priceMoney ? Number(priceMoney.amount) / 100 : 0,
+          images,
+          category: data?.categoryId || '',
+          inStock: true,
+          slug: (data?.name || '')
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, ''),
+          variants: variations.map((v) => ({
+            id: v.id,
+            name: v.itemVariationData?.name || '',
+            price: v.itemVariationData?.priceMoney
+              ? Number(v.itemVariationData.priceMoney.amount) / 100
+              : 0,
+            inStock: true,
+          })),
+        };
+      });
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
     return [];
   }
 }
