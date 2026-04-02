@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Sacred Portal Design Tokens",
+  "version": "1.0.0",
+  "lastUpdated": "2026-03-12",
+  "colors": {
+    "forest": {
+      "900": "#0D3D12",
+      "800": "#1B5E20",
+      "700": "#2E7D32",
+      "600": "#388E3C",
+      "500": "#4CAF50",
+      "400": "#66BB6A",
+      "300": "#81C784",
+      "200": "#A5D6A7",
+      "100": "#C8E6C9",
+      "50": "#E8F5E9"
+    },
+    "moss": {
+      "900": "#33691E",
+      "800": "#558B2F",
+      "700": "#689F38",
+      "600": "#7CB342",
+      "500": "#8BC34A",
+      "400": "#9CCC65",
+      "300": "#AED581",
+      "200": "#C5E1A5",
+      "100": "#DCEDC8",
+      "50": "#F1F8E9"
+    },
+    "charcoal": {
+      "900": "#1A1A1A",
+      "800": "#2C2C2C",
+      "700": "#404040",
+      "600": "#595959",
+      "500": "#737373",
+      "400": "#8C8C8C",
+      "300": "#A6A6A6",
+      "200": "#BFBFBF",
+      "100": "#D9D9D9",
+      "50": "#F2F2F2"
+    },
+    "cream": {
+      "900": "#E8E6E0",
+      "800": "#EFEEE9",
+      "700": "#F3F2ED",
+      "600": "#F7F6F2",
+      "500": "#FAF9F6",
+      "400": "#FBFAF8",
+      "300": "#FCFBFA",
+      "200": "#FDFDFC",
+      "100": "#FEFEFD",
+      "50": "#FFFFFF"
+    },
+    "success": {
+      "900": "#1B5E20",
+      "500": "#4CAF50",
+      "100": "#C8E6C9"
+    },
+    "warning": {
+      "900": "#E65100",
+      "500": "#FF9800",
+      "100": "#FFE0B2"
+    },
+    "error": {
+      "900": "#B71C1C",
+      "500": "#F44336",
+      "100": "#FFCDD2"
+    },
+    "info": {
+      "900": "#01579B",
+      "500": "#03A9F4",
+      "100": "#B3E5FC"
+    }
+  },
+  "semantic": {
+    "background": {
+      "primary": "#FAF9F6",
+      "secondary": "#FFFFFF",
+      "tertiary": "#E8E6E0",
+      "hover": "#E8F5E9",
+      "active": "#C8E6C9",
+      "selected": "#A5D6A7",
+      "disabled": "#F2F2F2",
+      "overlay": "rgba(26, 26, 26, 0.6)"
+    },
+    "text": {
+      "primary": "#2C2C2C",
+      "secondary": "#595959",
+      "tertiary": "#737373",
+      "inverse": "#FFFFFF",
+      "link": "#1B5E20",
+      "linkHover": "#2E7D32"
+    },
+    "brand": {
+      "primary": "#1B5E20",
+      "primaryHover": "#2E7D32",
+      "primaryActive": "#0D3D12",
+      "secondary": "#558B2F",
+      "accent": "#8BC34A"
+    },
+    "border": {
+      "default": "#BFBFBF",
+      "subtle": "#D9D9D9",
+      "strong": "#A6A6A6",
+      "focus": "#1B5E20",
+      "error": "#F44336",
+      "success": "#4CAF50"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": "'Cinzel Decorative', Georgia, serif",
+      "body": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    },
+    "fontSize": {
+      "display": "64px",
+      "h1": "48px",
+      "h2": "36px",
+      "h3": "28px",
+      "h4": "24px",
+      "h5": "20px",
+      "h6": "18px",
+      "bodyLg": "18px",
+      "body": "16px",
+      "bodySm": "14px",
+      "caption": "12px",
+      "button": "16px",
+      "label": "14px"
+    },
+    "lineHeight": {
+      "display": "72px",
+      "h1": "56px",
+      "h2": "44px",
+      "h3": "36px",
+      "h4": "32px",
+      "h5": "28px",
+      "h6": "26px",
+      "bodyLg": "30px",
+      "body": "28px",
+      "bodySm": "24px",
+      "caption": "20px",
+      "button": "24px",
+      "label": "20px"
+    },
+    "fontWeight": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "letterSpacing": {
+      "tight": "-0.02em",
+      "normal": "0",
+      "wide": "0.02em",
+      "wider": "0.05em"
+    }
+  },
+  "spacing": {
+    "0": "0",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px",
+    "16": "64px",
+    "20": "80px",
+    "24": "96px",
+    "32": "128px",
+    "40": "160px",
+    "48": "192px"
+  },
+  "breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px",
+    "2xl": "1536px"
+  },
+  "container": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1200px",
+    "2xl": "1400px"
+  },
+  "borderRadius": {
+    "none": "0",
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
+    "xl": "16px",
+    "2xl": "24px",
+    "full": "9999px"
+  },
+  "animation": {
+    "duration": {
+      "instant": "0ms",
+      "fast": "150ms",
+      "normal": "250ms",
+      "slow": "400ms",
+      "slower": "600ms",
+      "slowest": "1000ms"
+    },
+    "easing": {
+      "linear": "linear",
+      "in": "cubic-bezier(0.4, 0, 1, 1)",
+      "out": "cubic-bezier(0, 0, 0.2, 1)",
+      "inOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "smooth": "cubic-bezier(0.25, 0.1, 0.25, 1)"
+    }
+  },
+  "shadow": {
+    "sm": "0 1px 2px rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 6px rgba(0, 0, 0, 0.07)",
+    "lg": "0 8px 16px rgba(0, 0, 0, 0.1)",
+    "xl": "0 12px 24px rgba(0, 0, 0, 0.12)",
+    "2xl": "0 24px 48px rgba(0, 0, 0, 0.15)"
+  },
+  "zIndex": {
+    "base": 0,
+    "dropdown": 100,
+    "sticky": 200,
+    "fixed": 300,
+    "modalBackdrop": 400,
+    "modal": 500,
+    "popover": 600,
+    "tooltip": 700
+  }
+}

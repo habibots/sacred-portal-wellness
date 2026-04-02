@@ -1,0 +1,21 @@
+Page Name,URL,Parent Page,Priority,Status,Content Source,Notes
+Homepage,/,None,Critical,Complete,Phase 1 + New,Brand introduction and featured content
+Shop / All Products,/shop,None,Critical,Draft - Needs Product Data,New,Product catalog browsing
+Yoni Steam Blends Category,/shop/yoni-steam-blends,Shop,High,Pending,Square API,Category page for steam blends
+Yoni Seats Category,/shop/yoni-seats,Shop,High,Pending,Square API,Category page for seats
+Product Detail (Dynamic),/product/[slug],Category Pages,Critical,Template Ready,Square API,Individual product showcase
+The Sacred Portal Path,/coaching,None,Critical,Draft - Needs Pricing,Phase 1,12-week coaching program
+About / Meet the Creator,/about,None,High,Complete,Phase 1,Creator bio and credentials
+What is Yoni Steaming?,/yoni-steaming,None,High,Complete,Phase 1 + Expanded,Educational pillar page
+FAQ,/faq,None,Medium,Complete,Phase 1 + Expanded,Frequently asked questions
+Testimonials,/testimonials,None,Medium,Complete,Phase 1,Client success stories
+Contact,/contact,None,High,Complete,New,Contact form and information
+Workshops & Retreats,/workshops,None,Low,Pending,New,Coming soon placeholder
+Blog Index,/blog,None,Low,Pending,New,Future blog posts
+Disclaimer,/disclaimer,None,Critical,Complete,New,Health and legal disclaimers
+Return & Exchange Policy,/returns,None,Critical,Complete,New,Return policy
+Shipping Policy,/shipping,None,High,Complete,New,Shipping and delivery
+Privacy Policy,/privacy,None,Medium,Complete,New,Data privacy
+404 Not Found,/404,None,Medium,Complete,New,Custom error page
+Thank You - Order,/thank-you,None,High,Complete,New,Post-purchase confirmation
+Thank You - Contact,/thank-you/contact,None,Medium,Complete,New,Form submission confirmation

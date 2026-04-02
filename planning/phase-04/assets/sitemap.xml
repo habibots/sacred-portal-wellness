@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://sacredportalwellness.com/</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Shop Pages -->
+  <url>
+    <loc>https://sacredportalwellness.com/shop</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/shop/yoni-steam-blends</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/shop/yoni-seats</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Coaching -->
+  <url>
+    <loc>https://sacredportalwellness.com/coaching</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Educational Pages -->
+  <url>
+    <loc>https://sacredportalwellness.com/yoni-steaming</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/faq</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- About Pages -->
+  <url>
+    <loc>https://sacredportalwellness.com/about</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/testimonials</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact -->
+  <url>
+    <loc>https://sacredportalwellness.com/contact</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Policy Pages -->
+  <url>
+    <loc>https://sacredportalwellness.com/disclaimer</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/returns</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/shipping</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://sacredportalwellness.com/privacy</loc>
+    <lastmod>2026-03-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Note: Product pages will be dynamically generated from Square API -->
+  <!-- Note: Blog pages will be added when blog content is created -->
+  
+</urlset>

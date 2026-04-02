@@ -1,0 +1,137 @@
+'use client';
+
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { CartItem, CartSummary } from '@/types';
+
+interface CartContextType {
+  items: CartItem[];
+  summary: CartSummary;
+  addItem: (item: CartItem) => void;
+  removeItem: (productId: string, variantId?: string) => void;
+  updateQuantity: (productId: string, variantId: string | undefined, quantity: number) => void;
+  clearCart: () => void;
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+}
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export function CartProvider({ children }: { children: ReactNode }) {
+  // Load cart from localStorage using lazy initialization
+  const [items, setItems] = useState<CartItem[]>(() => {
+    if (typeof window === 'undefined') return [];
+    const savedCart = localStorage.getItem('sacred-portal-cart');
+    if (savedCart) {
+      try {
+        return JSON.parse(savedCart);
+      } catch (error) {
+        console.error('Failed to load cart:', error);
+        return [];
+      }
+    }
+    return [];
+  });
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('sacred-portal-cart', JSON.stringify(items));
+  }, [items]);
+
+  const addItem = (newItem: CartItem) => {
+    setItems((currentItems) => {
+      const existingIndex = currentItems.findIndex(
+        (item) =>
+          item.productId === newItem.productId &&
+          item.variantId === newItem.variantId
+      );
+
+      if (existingIndex > -1) {
+        const updated = [...currentItems];
+        updated[existingIndex].quantity += newItem.quantity;
+        return updated;
+      }
+
+      return [...currentItems, newItem];
+    });
+    setIsOpen(true);
+  };
+
+  const removeItem = (productId: string, variantId?: string) => {
+    setItems((currentItems) =>
+      currentItems.filter(
+        (item) =>
+          !(item.productId === productId && item.variantId === variantId)
+      )
+    );
+  };
+
+  const updateQuantity = (
+    productId: string,
+    variantId: string | undefined,
+    quantity: number
+  ) => {
+    if (quantity <= 0) {
+      removeItem(productId, variantId);
+      return;
+    }
+
+    setItems((currentItems) =>
+      currentItems.map((item) =>
+        item.productId === productId && item.variantId === variantId
+          ? { ...item, quantity }
+          : item
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setItems([]);
+    setIsOpen(false);
+  };
+
+  // Calculate cart summary
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const shipping = 0; // Will be calculated at checkout
+  const tax = 0; // Will be calculated at checkout
+  const total = subtotal + shipping + tax;
+
+  const summary: CartSummary = {
+    subtotal,
+    shipping,
+    tax,
+    total,
+    itemCount,
+  };
+
+  return (
+    <CartContext.Provider
+      value={{
+        items,
+        summary,
+        addItem,
+        removeItem,
+        updateQuantity,
+        clearCart,
+        isOpen,
+        openCart: () => setIsOpen(true),
+        closeCart: () => setIsOpen(false),
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+}
+
+export function useCart() {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within CartProvider');
+  }
+  return context;
+}

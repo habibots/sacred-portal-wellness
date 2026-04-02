@@ -1,0 +1,45 @@
+name: sacred-portal-wellness
+region: sfo
+services:
+  - name: web
+    github:
+      repo: habibots/sacred-portal-wellness
+      branch: main
+      deploy_on_push: true
+    source_dir: /app
+    build_command: npm run build
+    run_command: npm run start
+    environment_slug: node-js
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    instance_count: 1
+    http_port: 3000
+    envs:
+      - key: SQUARE_ACCESS_TOKEN
+        value: EAAAl25YA-NBUpsGNk6ApTsm0o6E9tDcZkUFHPxs3tbpSH7TaUKyJAxS4eArT9Qf
+        type: SECRET
+      - key: SQUARE_APP_ID
+        value: sq0idp-8z10gtmrqTVGub0LvZH3AQ
+        type: GENERAL
+      - key: SQUARE_LOCATION_ID
+        value: LPSZSAKJZ6281
+        type: GENERAL
+      - key: SQUARE_ENV
+        value: production
+        type: GENERAL
+      - key: NEXT_PUBLIC_SQUARE_APP_ID
+        value: sq0idp-8z10gtmrqTVGub0LvZH3AQ
+        type: GENERAL
+      - key: NEXT_PUBLIC_SQUARE_LOCATION_ID
+        value: LPSZSAKJZ6281
+        type: GENERAL
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://sacredportalwellness.com
+        type: GENERAL
+      - key: NODE_ENV
+        value: production
+        type: GENERAL
+domains:
+  - domain: sacredportalwellness.com
+    type: PRIMARY
+  - domain: www.sacredportalwellness.com
+    type: ALIAS

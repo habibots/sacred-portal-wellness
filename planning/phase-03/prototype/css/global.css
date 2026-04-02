@@ -1,0 +1,300 @@
+/**
+ * Global Styles & Utilities
+ * Sacred Portal
+ */
+
+/* Typography */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: var(--font-weight-bold);
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: var(--font-weight-bold);
+}
+
+h3, .h3 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: var(--font-weight-semibold);
+}
+
+h4, .h4 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  font-weight: var(--font-weight-semibold);
+}
+
+h5, .h5 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-h5);
+  line-height: var(--line-height-h5);
+  font-weight: var(--font-weight-semibold);
+}
+
+h6, .h6 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-h6);
+  line-height: var(--line-height-h6);
+  font-weight: var(--font-weight-semibold);
+}
+
+.body-lg {
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+}
+
+.body {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.body-sm {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+}
+
+.caption {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding-mobile);
+  padding-right: var(--container-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--container-padding-tablet);
+    padding-right: var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--container-padding-desktop);
+    padding-right: var(--container-padding-desktop);
+  }
+}
+
+.container-narrow {
+  max-width: var(--container-md);
+}
+
+.container-full {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Section */
+.section {
+  padding-top: var(--spacing-section-md);
+  padding-bottom: var(--spacing-section-md);
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-top: var(--spacing-section-sm);
+    padding-bottom: var(--spacing-section-sm);
+  }
+}
+
+.section-sm {
+  padding-top: var(--spacing-section-sm);
+  padding-bottom: var(--spacing-section-sm);
+}
+
+.section-lg {
+  padding-top: var(--spacing-section-lg);
+  padding-bottom: var(--spacing-section-lg);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    gap: var(--space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    gap: var(--space-8);
+  }
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 767px) {
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* Text alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Text colors */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-inverse { color: var(--text-inverse); }
+.text-brand { color: var(--brand-primary); }
+
+/* Background colors */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+.bg-brand { background-color: var(--brand-primary); }
+
+/* Spacing utilities */
+.mt-0 { margin-top: var(--space-0); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+.mt-16 { margin-top: var(--space-16); }
+
+.mb-0 { margin-bottom: var(--space-0); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
+
+.pt-4 { padding-top: var(--space-4); }
+.pt-8 { padding-top: var(--space-8); }
+.pt-12 { padding-top: var(--space-12); }
+.pt-16 { padding-top: var(--space-16); }
+
+.pb-4 { padding-bottom: var(--space-4); }
+.pb-8 { padding-bottom: var(--space-8); }
+.pb-12 { padding-bottom: var(--space-12); }
+.pb-16 { padding-bottom: var(--space-16); }
+
+/* Focus visible */
+*:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Link styles */
+a {
+  color: var(--text-link);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--text-link-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Prose (long-form content) */
+.prose {
+  max-width: 65ch;
+}
+
+.prose p {
+  margin-bottom: var(--space-6);
+}
+
+.prose h2 {
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-6);
+}
+
+.prose h3 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: var(--space-6);
+  padding-left: var(--space-6);
+}
+
+.prose li {
+  margin-bottom: var(--space-2);
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}

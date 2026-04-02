@@ -1,0 +1,68 @@
+Source Page,Destination Page,Anchor Text,Link Type,Link Location,Priority,Status
+Homepage,The Sacred Portal Path (Coaching),"Explore The Sacred Portal Path",CTA,Body,High,Active
+Homepage,Shop / Yoni Steam Blends,"Shop Yoni Steam Blends",CTA,Body,High,Active
+Homepage,About,"Read My Story",Contextual,Body,High,Active
+Homepage,Testimonials,"Read More Testimonials",Contextual,Body,Medium,Active
+Homepage,What is Yoni Steaming?,"Learn More About Yoni Steaming",Contextual,Body,High,Active
+Homepage,Workshops,"Stay Tuned",Contextual,Body,Low,Active
+Shop,Yoni Steam Blends Category,"Yoni Steam Blends",Navigation,Body,High,Active
+Shop,Yoni Seats Category,"Yoni Seats",Navigation,Body,High,Active
+Shop,What is Yoni Steaming?,"Learn About Yoni Steaming",CTA,Body,High,Active
+Shop,Shipping Policy,"View Shipping Policy",Contextual,Body,Medium,Active
+Shop,Return Policy,"View Return Policy",Contextual,Body,Medium,Active
+Shop,Contact,"Contact Us",Contextual,Body,Medium,Active
+Coaching,About,"Read My Full Story",Contextual,Body,High,Active
+Coaching,Testimonials,"Read More Testimonials",Contextual,Body,High,Active
+Coaching,FAQ,"Frequently Asked Questions",Contextual,Body,Medium,Active
+Coaching,Contact,"Book Your Free Discovery Call",CTA,Body,High,Active
+Coaching,What is Yoni Steaming?,"yoni steaming",Contextual,Body,Low,Active
+Coaching,Disclaimer,"Full disclaimer",Contextual,Body,Low,Active
+About,Coaching,"Explore The Sacred Portal Path",CTA,Body,High,Active
+About,Contact,"Book a Free Discovery Call",CTA,Body,High,Active
+About,Shop,"Shop Wellness Products",CTA,Body,Medium,Active
+About,Testimonials,"Client success stories",Contextual,Body,Medium,Active
+About,What is Yoni Steaming?,"yoni steaming",Contextual,Body,Low,Active
+What is Yoni Steaming?,Shop / Yoni Steam Blends,"Shop Organic Yoni Steam Blends",CTA,Body,High,Active
+What is Yoni Steaming?,Shop / Yoni Seats,"Browse Yoni Seats",CTA,Body,High,Active
+What is Yoni Steaming?,FAQ,"See More FAQs",Contextual,Body,Medium,Active
+What is Yoni Steaming?,Contact,"Contact Me",Contextual,Body,Medium,Active
+What is Yoni Steaming?,Coaching,"holistic wellness support",Contextual,Body,Low,Active
+What is Yoni Steaming?,Disclaimer,"Full health disclaimer",Contextual,Body,Low,Active
+FAQ,What is Yoni Steaming?,"Learn more about yoni steaming",Contextual,Body,High,Active
+FAQ,Coaching,"Learn more about the coaching program",Contextual,Body,High,Active
+FAQ,Shop,"Browse products",Contextual,Body,Medium,Active
+FAQ,Shipping Policy,"View our full shipping policy",Contextual,Body,Medium,Active
+FAQ,Return Policy,"View our full return policy",Contextual,Body,Medium,Active
+FAQ,Privacy Policy,"View our privacy policy",Contextual,Body,Low,Active
+FAQ,Contact,"Contact us",CTA,Body,High,Active
+Testimonials,Coaching,"Learn More About Coaching",CTA,Body,High,Active
+Testimonials,Contact,"Book Your Free Discovery Call",CTA,Body,High,Active
+Testimonials,Shop / Yoni Steam Blends,"Shop Yoni Steam Blends",CTA,Body,Medium,Active
+Testimonials,About,"Meet the creator",Contextual,Body,Medium,Active
+Testimonials,FAQ,"Common questions",Contextual,Body,Low,Active
+Contact,Coaching,"coaching program",Contextual,Body,High,Active
+Contact,FAQ,"FAQ page",Contextual,Body,Medium,Active
+Contact,Privacy Policy,"Privacy Policy",Contextual,Body,Low,Active
+Disclaimer,Contact,"Contact",Contextual,Body,Low,Active
+Disclaimer,Privacy Policy,"Privacy Policy",Contextual,Body,Low,Active
+Returns,Contact,"Contact",Contextual,Body,Medium,Active
+Returns,Shipping Policy,"Shipping Policy",Contextual,Body,Medium,Active
+Returns,FAQ,"FAQ",Contextual,Body,Low,Active
+Shipping,Contact,"Contact",Contextual,Body,Medium,Active
+Shipping,Return Policy,"Return Policy",Contextual,Body,Medium,Active
+Shipping,FAQ,"FAQ",Contextual,Body,Low,Active
+Privacy,Contact,"Contact",Contextual,Body,Low,Active
+Privacy,Disclaimer,"Disclaimer",Contextual,Body,Low,Active
+404,Homepage,"Return to our homepage",Navigation,Body,High,Active
+404,Shop,"Browse yoni steam blends and wellness products",Navigation,Body,High,Active
+404,Coaching,"Learn about our 12-week coaching program",Navigation,Body,High,Active
+404,What is Yoni Steaming?,"Educational guide",Navigation,Body,Medium,Active
+404,Contact,"Get in touch",Navigation,Body,Medium,Active
+Thank You - Order,What is Yoni Steaming?,"What is Yoni Steaming?",Contextual,Body,High,Active
+Thank You - Order,Shop,"Shop All Products",CTA,Body,Medium,Active
+Thank You - Order,Coaching,"The Sacred Portal Path",CTA,Body,Medium,Active
+Thank You - Order,Contact,"Book a Free Discovery Call",CTA,Body,Low,Active
+Thank You - Contact,What is Yoni Steaming?,"What is Yoni Steaming?",Contextual,Body,High,Active
+Thank You - Contact,FAQ,"Visit FAQ",Contextual,Body,High,Active
+Thank You - Contact,Coaching,"The Sacred Portal Path",Contextual,Body,Medium,Active
+Thank You - Contact,Shop / Yoni Steam Blends,"Shop Yoni Steam Blends",CTA,Body,Medium,Active
