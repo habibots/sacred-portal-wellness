@@ -1,49 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { ContactFormSchema, sanitizeString } from '@/lib/validation/schemas';
+import { contactLimiter, getClientIp } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
+  // Rate limiting
+  const ip = getClientIp(request);
+  const limit = contactLimiter.check(ip);
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again shortly.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(Math.ceil(limit.retryAfterMs / 1000)) },
+      }
+    );
+  }
+
   try {
-    const { name, email, subject, message } = await request.json();
+    const body = await request.json();
 
-    // Validate required fields
-    if (!name || !email || !subject || !message) {
+    // Validate input with Zod
+    const parsed = ContactFormSchema.safeParse(body);
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'Invalid form data', details: parsed.error.flatten() },
         { status: 400 }
       );
     }
 
-    // Basic email validation
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      );
-    }
+    // Sanitize all fields
+    const name = sanitizeString(parsed.data.name);
+    const email = sanitizeString(parsed.data.email);
+    const subject = sanitizeString(parsed.data.subject);
+    const message = sanitizeString(parsed.data.message);
 
-    // Send notification email to the business owner
-    // Using a simple fetch to a free email service (Formspree-style)
-    // For now, we'll store it and send via the business email
-    const mailtoBody = `
-New Contact Form Submission
----
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
-
-Message:
-${message}
----
-Sent from sacredportalwellness.com
-    `.trim();
-
-    // Log the submission (visible in PM2 logs)
+    // Log the sanitized submission (visible in PM2 logs)
     console.log('=== CONTACT FORM SUBMISSION ===');
-    console.log(mailtoBody);
+    console.log(`Name: ${name}`);
+    console.log(`Email: ${email}`);
+    console.log(`Subject: ${subject}`);
+    console.log(`Message: ${message}`);
     console.log('=== END SUBMISSION ===');
-
-    // For production email delivery, we'll use the Square customer directory
-    // to track inquiries. For now, submissions are logged to PM2.
-    // To view: ssh into server and run `pm2 logs sacred-portal`
 
     return NextResponse.json({ success: true });
   } catch (error) {

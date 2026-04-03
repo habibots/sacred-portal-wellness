@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '@/lib/cart/context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -18,6 +19,7 @@ interface Product {
 
 export function ProductGrid({ products }: { products: Product[] }) {
   const { addItem } = useCart();
+  const [announcement, setAnnouncement] = useState('');
 
   const handleAddToCart = (product: Product) => {
     const variant = product.variants[0];
@@ -29,14 +31,17 @@ export function ProductGrid({ products }: { products: Product[] }) {
       quantity: 1,
       image: product.images[0],
     });
+    setAnnouncement(`${product.name} added to cart`);
   };
 
   return (
+    <>
+    <div aria-live="polite" className="sr-only">{announcement}</div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {products.map((product) => (
         <Card key={product.id} className="h-full hover:shadow-lg transition-shadow">
           <CardHeader className="p-0">
-            <div className="relative aspect-square bg-cream-600 rounded-t-lg overflow-hidden">
+            <div className="relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-t-lg overflow-hidden">
               {product.images[0] ? (
                 <Image
                   src={product.images[0]}
@@ -54,11 +59,11 @@ export function ProductGrid({ products }: { products: Product[] }) {
           </CardHeader>
           <CardContent className="p-4">
             <h3 className="text-h6 font-display mb-2">{product.name}</h3>
-            <p className="text-body-sm text-charcoal-600 line-clamp-2 mb-4">
+            <p className="text-body-sm text-charcoal-600 dark:text-charcoal-300 line-clamp-2 mb-4">
               {product.description}
             </p>
             <div className="flex items-center justify-between">
-              <span className="text-h5 font-semibold text-forest-800">
+              <span className="text-h5 font-semibold text-forest-800 dark:text-forest-400">
                 {formatPrice(product.price)}
               </span>
               <Button
@@ -73,5 +78,6 @@ export function ProductGrid({ products }: { products: Product[] }) {
         </Card>
       ))}
     </div>
+    </>
   );
 }

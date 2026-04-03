@@ -52,18 +52,18 @@ export default function FAQPage() {
         
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white rounded-lg p-6 shadow-md">
-              <h2 className="text-h5 font-display mb-3 text-forest-800">
+            <div key={index} className="bg-white rounded-lg p-6 shadow-md dark:bg-charcoal-800">
+              <h2 className="text-h5 font-display mb-3 text-forest-800 dark:text-forest-400">
                 {faq.question}
               </h2>
-              <p className="text-body text-charcoal-700">
+              <p className="text-body text-charcoal-700 dark:text-cream-700">
                 {faq.answer}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 bg-cream-600 rounded-lg p-8 text-center">
+        <div className="mt-12 bg-cream-600 dark:bg-charcoal-800 rounded-lg p-8 text-center">
           <h2 className="text-h4 font-display mb-4">Still Have Questions?</h2>
           <p className="text-body mb-6">
             I&apos;m here to help! Feel free to reach out with any questions about yoni steaming 

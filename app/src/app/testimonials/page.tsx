@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+
 export const metadata = {
   title: 'How This Work Has Made a Difference - Sacred Portal Wellness',
   description: 'Read testimonials from women who have transformed their lives through Sacred Portal Wellness',
@@ -33,7 +36,7 @@ export default function TestimonialsPage() {
         <h1 className="text-h1 font-display mb-4 text-center">
           How This Work Has Made a Difference
         </h1>
-        <p className="text-body-lg text-charcoal-600 text-center mb-12">
+        <p className="text-body-lg text-charcoal-600 dark:text-charcoal-300 text-center mb-12">
           Real stories from women who have transformed their lives
         </p>
 
@@ -41,19 +44,25 @@ export default function TestimonialsPage() {
           {testimonials.map((t, i) => (
             <blockquote
               key={i}
-              className="bg-white border border-charcoal-100 rounded-lg p-6 sm:p-8 shadow-sm"
+              className="bg-white border border-charcoal-100 rounded-lg p-6 sm:p-8 shadow-sm dark:bg-charcoal-800 dark:border-charcoal-700"
             >
-              <svg className="w-8 h-8 text-forest-200 mb-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-forest-200 dark:text-forest-700 mb-4" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983z" />
               </svg>
-              <p className="text-body-lg italic text-charcoal-800 leading-relaxed">
+              <p className="text-body-lg italic text-charcoal-800 dark:text-cream-500 leading-relaxed">
                 &ldquo;{t.quote}&rdquo;
               </p>
-              <cite className="block mt-6 text-body font-semibold text-charcoal-600 not-italic">
+              <cite className="block mt-6 text-body font-semibold text-charcoal-600 dark:text-charcoal-400 not-italic">
                 &mdash; {t.name}, age {t.age}
               </cite>
             </blockquote>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link href="https://calendly.com/aahmm9966/30min" target="_blank" rel="noopener noreferrer">
+            <Button size="lg">Book a free 30 minute call with me</Button>
+          </Link>
         </div>
       </div>
     </div>

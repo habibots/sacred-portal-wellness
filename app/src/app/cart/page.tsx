@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '@/lib/cart/context';
 import { Button } from '@/components/ui/button';
 import { formatPrice } from '@/lib/utils/format';
@@ -8,13 +9,29 @@ import Link from 'next/link';
 
 export default function CartPage() {
   const { items, summary, updateQuantity, removeItem } = useCart();
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const handleUpdateQuantity = (productId: string, variantId: string | undefined, quantity: number, itemName: string) => {
+    if (quantity <= 0) {
+      removeItem(productId, variantId);
+      setStatusMessage(`Removed ${itemName} from cart`);
+    } else {
+      updateQuantity(productId, variantId, quantity);
+      setStatusMessage(`Updated ${itemName} quantity to ${quantity}`);
+    }
+  };
+
+  const handleRemoveItem = (productId: string, variantId: string | undefined, itemName: string) => {
+    removeItem(productId, variantId);
+    setStatusMessage(`Removed ${itemName} from cart`);
+  };
 
   if (items.length === 0) {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-h2 font-display mb-4">Your Cart is Empty</h1>
-          <p className="text-body-lg text-charcoal-600 mb-8">
+          <p className="text-body-lg text-charcoal-600 dark:text-charcoal-300 mb-8">
             Add some items to your cart to get started
           </p>
           <Link href="/shop">
@@ -28,6 +45,7 @@ export default function CartPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-h1 font-display mb-8">Shopping Cart</h1>
+      <div aria-live="polite" className="sr-only">{statusMessage}</div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items */}
@@ -35,9 +53,9 @@ export default function CartPage() {
           {items.map((item) => (
             <div
               key={`${item.productId}-${item.variantId}`}
-              className="bg-white rounded-lg p-6 shadow-md flex gap-4"
+              className="bg-white rounded-lg p-6 shadow-md flex gap-4 dark:bg-charcoal-800"
             >
-              <div className="w-24 h-24 bg-cream-600 rounded-md flex-shrink-0 overflow-hidden relative">
+              <div className="w-24 h-24 bg-cream-600 dark:bg-charcoal-700 rounded-md flex-shrink-0 overflow-hidden relative">
                 {item.image ? (
                   <Image
                     src={item.image}
@@ -63,28 +81,29 @@ export default function CartPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() =>
-                        updateQuantity(item.productId, item.variantId, item.quantity - 1)
+                        handleUpdateQuantity(item.productId, item.variantId, item.quantity - 1, item.name)
                       }
-                      className="w-8 h-8 rounded-md border border-charcoal-300 hover:bg-charcoal-50"
-                      aria-label="Decrease quantity"
+                      className="w-11 h-11 rounded-md border border-charcoal-300 hover:bg-charcoal-50 dark:border-charcoal-600 dark:hover:bg-charcoal-700 flex items-center justify-center"
+                      aria-label={`Decrease quantity for ${item.name}`}
                     >
                       &minus;
                     </button>
                     <span className="w-12 text-center">{item.quantity}</span>
                     <button
                       onClick={() =>
-                        updateQuantity(item.productId, item.variantId, item.quantity + 1)
+                        handleUpdateQuantity(item.productId, item.variantId, item.quantity + 1, item.name)
                       }
-                      className="w-8 h-8 rounded-md border border-charcoal-300 hover:bg-charcoal-50"
-                      aria-label="Increase quantity"
+                      className="w-11 h-11 rounded-md border border-charcoal-300 hover:bg-charcoal-50 dark:border-charcoal-600 dark:hover:bg-charcoal-700 flex items-center justify-center"
+                      aria-label={`Increase quantity for ${item.name}`}
                     >
                       +
                     </button>
                   </div>
 
                   <button
-                    onClick={() => removeItem(item.productId, item.variantId)}
+                    onClick={() => handleRemoveItem(item.productId, item.variantId, item.name)}
                     className="text-error-500 hover:text-error-700 text-body-sm"
+                    aria-label={`Remove ${item.name} from cart`}
                   >
                     Remove
                   </button>
@@ -92,7 +111,7 @@ export default function CartPage() {
               </div>
 
               <div className="text-right">
-                <p className="text-h6 font-semibold text-forest-800">
+                <p className="text-h6 font-semibold text-forest-800 dark:text-forest-400">
                   {formatPrice(item.price * item.quantity)}
                 </p>
               </div>
@@ -102,23 +121,23 @@ export default function CartPage() {
 
         {/* Order Summary */}
         <div>
-          <div className="bg-white rounded-lg p-6 shadow-md sticky top-24">
+          <div className="bg-white rounded-lg p-6 shadow-md sticky top-24 dark:bg-charcoal-800">
             <h2 className="text-h5 font-display mb-4">Order Summary</h2>
 
             <div className="space-y-3 mb-6">
               <div className="flex justify-between text-body">
-                <span className="text-charcoal-600">Subtotal</span>
+                <span className="text-charcoal-600 dark:text-charcoal-300">Subtotal</span>
                 <span className="font-medium">{formatPrice(summary.subtotal)}</span>
               </div>
               <div className="flex justify-between text-body">
-                <span className="text-charcoal-600">Shipping</span>
+                <span className="text-charcoal-600 dark:text-charcoal-300">Shipping</span>
                 <span className="text-body-sm text-charcoal-500">
                   Calculated at checkout
                 </span>
               </div>
-              <div className="border-t border-charcoal-200 pt-3 flex justify-between text-h5 font-display">
+              <div className="border-t border-charcoal-200 dark:border-charcoal-600 pt-3 flex justify-between text-h5 font-display">
                 <span>Total</span>
-                <span className="text-forest-800">{formatPrice(summary.total)}</span>
+                <span className="text-forest-800 dark:text-forest-400">{formatPrice(summary.total)}</span>
               </div>
             </div>
 

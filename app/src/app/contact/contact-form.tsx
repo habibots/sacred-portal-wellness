@@ -35,9 +35,9 @@ export function ContactForm() {
 
   if (status === 'sent') {
     return (
-      <div className="text-center py-8">
-        <div className="bg-success-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-success-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="text-center py-8" role="status">
+        <div className="bg-success-100 dark:bg-success-900/30 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+          <svg aria-hidden="true" className="w-8 h-8 text-success-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -56,7 +56,7 @@ export function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-body-sm font-medium text-charcoal-700 mb-1">
+          <label htmlFor="name" className="block text-body-sm font-medium text-charcoal-700 dark:text-cream-700 mb-1">
             Name *
           </label>
           <Input
@@ -69,7 +69,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-body-sm font-medium text-charcoal-700 mb-1">
+          <label htmlFor="email" className="block text-body-sm font-medium text-charcoal-700 dark:text-cream-700 mb-1">
             Email *
           </label>
           <Input
@@ -84,7 +84,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-body-sm font-medium text-charcoal-700 mb-1">
+        <label htmlFor="subject" className="block text-body-sm font-medium text-charcoal-700 dark:text-cream-700 mb-1">
           Subject *
         </label>
         <Input
@@ -98,7 +98,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-body-sm font-medium text-charcoal-700 mb-1">
+        <label htmlFor="message" className="block text-body-sm font-medium text-charcoal-700 dark:text-cream-700 mb-1">
           Message *
         </label>
         <textarea
@@ -108,12 +108,12 @@ export function ContactForm() {
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder="Tell me about your wellness goals or questions..."
-          className="flex w-full rounded-md border border-charcoal-200 bg-white px-4 py-3 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 disabled:cursor-not-allowed disabled:opacity-50 resize-vertical"
+          className="flex w-full rounded-md border border-charcoal-200 bg-white px-4 py-3 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 disabled:cursor-not-allowed disabled:opacity-50 resize-vertical dark:bg-charcoal-800 dark:border-charcoal-600 dark:text-cream-500"
         />
       </div>
 
       {status === 'error' && (
-        <div className="bg-error-100 text-error-700 p-3 rounded-md text-body-sm">
+        <div role="alert" className="bg-error-100 text-error-700 p-3 rounded-md text-body-sm">
           Something went wrong. Please try again or email us directly.
         </div>
       )}

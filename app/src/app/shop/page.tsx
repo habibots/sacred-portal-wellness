@@ -70,17 +70,17 @@ export default async function ShopPage() {
           className="mb-6"
         />
         <h1 className="text-h1 font-display mb-4">Sacred Portal Apothecary</h1>
-        <p className="text-body-lg text-charcoal-600">
+        <p className="text-body-lg text-charcoal-600 dark:text-charcoal-300">
           Carefully curated herbs and wellness products for your sacred practice
         </p>
       </div>
 
       {products.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-body-lg text-charcoal-500 mb-2">
+          <p className="text-body-lg text-charcoal-500 dark:text-charcoal-400 mb-2">
             Products are loading soon.
           </p>
-          <p className="text-body text-charcoal-400">
+          <p className="text-body text-charcoal-400 dark:text-charcoal-500">
             Please check back shortly or contact us for product inquiries.
           </p>
         </div>

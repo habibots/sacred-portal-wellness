@@ -10,7 +10,7 @@ import { isValidZipCode } from '@/lib/shipping/validation';
 import Link from 'next/link';
 
 export default function CheckoutPage() {
-  const { items, summary, clearCart } = useCart();
+  const { items, summary } = useCart();
   const [zipCode, setZipCode] = useState('');
   const [shipping, setShipping] = useState<{
     cost: number;
@@ -27,7 +27,7 @@ export default function CheckoutPage() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-h2 font-display mb-4">Your Cart is Empty</h1>
-          <p className="text-body-lg text-charcoal-600 mb-8">
+          <p className="text-body-lg text-charcoal-600 dark:text-charcoal-300 mb-8">
             Add some items to your cart before checking out
           </p>
           <Link href="/shop">
@@ -61,6 +61,9 @@ export default function CheckoutPage() {
     try {
       const shippingCalc = calculateShipping(zipCode, summary.subtotal);
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -74,7 +77,10 @@ export default function CheckoutPage() {
           })),
           shippingCost: shippingCalc.cost,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const data = await res.json();
 
@@ -82,15 +88,16 @@ export default function CheckoutPage() {
         throw new Error(data.error || 'Checkout failed');
       }
 
-      // Clear cart before redirecting to Square
-      clearCart();
-
-      // Redirect to Square hosted checkout
+      // Redirect to Square hosted checkout — cart is cleared on the success page
       window.location.href = data.checkoutUrl;
     } catch (error) {
-      setCheckoutError(
-        error instanceof Error ? error.message : 'Something went wrong. Please try again.'
-      );
+      const message =
+        error instanceof DOMException && error.name === 'AbortError'
+          ? 'Request timed out. Please try again.'
+          : error instanceof Error
+            ? error.message
+            : 'Something went wrong. Please try again.';
+      setCheckoutError(message);
       setIsLoading(false);
     }
   };
@@ -105,29 +112,34 @@ export default function CheckoutPage() {
         {/* Shipping & Checkout */}
         <div className="lg:col-span-3 space-y-6">
           {/* Shipping Calculator */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="bg-white rounded-lg p-6 shadow-md dark:bg-charcoal-800">
             <h2 className="text-h5 font-display mb-4">Shipping</h2>
-            <p className="text-body-sm text-charcoal-600 mb-4">
+            <p className="text-body-sm text-charcoal-600 dark:text-charcoal-300 mb-4">
               Enter your ZIP code to calculate shipping. San Diego orders over $100 ship free.
             </p>
+            <label htmlFor="zip-code" className="block text-body-sm font-medium text-charcoal-700 dark:text-cream-700 mb-1">
+              ZIP Code
+            </label>
             <div className="flex gap-3">
               <Input
+                id="zip-code"
                 type="text"
-                placeholder="ZIP Code"
+                placeholder="e.g. 92101"
                 value={zipCode}
                 onChange={(e) => handleZipChange(e.target.value)}
                 maxLength={10}
                 className="max-w-[200px]"
                 error={!!zipError}
+                aria-describedby={zipError ? 'zip-error' : undefined}
               />
             </div>
             {zipError && (
-              <p className="text-error-500 text-body-sm mt-2">{zipError}</p>
+              <p id="zip-error" role="alert" className="text-error-500 text-body-sm mt-2">{zipError}</p>
             )}
             {shipping && (
-              <div className="mt-4 p-3 bg-cream-600 rounded-md">
+              <div className="mt-4 p-3 bg-cream-600 dark:bg-charcoal-700 rounded-md">
                 <p className="text-body font-medium">{shipping.message}</p>
-                <p className="text-body-sm text-charcoal-600 mt-1">
+                <p className="text-body-sm text-charcoal-600 dark:text-charcoal-300 mt-1">
                   Estimated delivery: {getDeliveryEstimate(shipping.method as 'local' | 'standard')}
                 </p>
               </div>
@@ -135,15 +147,15 @@ export default function CheckoutPage() {
           </div>
 
           {/* Checkout Button */}
-          <div className="bg-white rounded-lg p-6 shadow-md">
+          <div className="bg-white rounded-lg p-6 shadow-md dark:bg-charcoal-800">
             <h2 className="text-h5 font-display mb-4">Payment</h2>
-            <p className="text-body text-charcoal-600 mb-6">
+            <p className="text-body text-charcoal-600 dark:text-charcoal-300 mb-6">
               You&apos;ll be securely redirected to Square to complete your payment.
               All major credit cards and digital wallets accepted.
             </p>
 
             {checkoutError && (
-              <div className="bg-error-100 text-error-700 p-3 rounded-md mb-4 text-body-sm">
+              <div role="alert" className="bg-error-100 text-error-700 p-3 rounded-md mb-4 text-body-sm">
                 {checkoutError}
               </div>
             )}
@@ -157,7 +169,7 @@ export default function CheckoutPage() {
               {isLoading ? 'Redirecting to payment...' : `Pay ${formatPrice(total)}`}
             </Button>
 
-            <p className="text-body-sm text-charcoal-400 text-center mt-3">
+            <p className="text-body-sm text-charcoal-400 dark:text-charcoal-500 text-center mt-3">
               Secure checkout powered by Square
             </p>
           </div>
@@ -165,7 +177,7 @@ export default function CheckoutPage() {
 
         {/* Order Summary */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg p-6 shadow-md sticky top-24">
+          <div className="bg-white rounded-lg p-6 shadow-md dark:bg-charcoal-800 sticky top-24">
             <h2 className="text-h5 font-display mb-4">Order Summary</h2>
 
             <div className="space-y-3 mb-6">
@@ -174,7 +186,7 @@ export default function CheckoutPage() {
                   key={`${item.productId}-${item.variantId}`}
                   className="flex justify-between text-body"
                 >
-                  <span className="text-charcoal-600">
+                  <span className="text-charcoal-600 dark:text-charcoal-300">
                     {item.name} &times; {item.quantity}
                   </span>
                   <span className="font-medium">
@@ -184,13 +196,13 @@ export default function CheckoutPage() {
               ))}
             </div>
 
-            <div className="border-t border-charcoal-200 pt-3 space-y-2">
+            <div className="border-t border-charcoal-200 dark:border-charcoal-600 pt-3 space-y-2">
               <div className="flex justify-between text-body">
-                <span className="text-charcoal-600">Subtotal</span>
+                <span className="text-charcoal-600 dark:text-charcoal-300">Subtotal</span>
                 <span>{formatPrice(summary.subtotal)}</span>
               </div>
               <div className="flex justify-between text-body">
-                <span className="text-charcoal-600">Shipping</span>
+                <span className="text-charcoal-600 dark:text-charcoal-300">Shipping</span>
                 <span>
                   {shipping
                     ? shipping.isFree
@@ -199,9 +211,9 @@ export default function CheckoutPage() {
                     : 'Enter ZIP code'}
                 </span>
               </div>
-              <div className="border-t border-charcoal-200 pt-2 flex justify-between text-h5 font-display">
+              <div className="border-t border-charcoal-200 dark:border-charcoal-600 pt-2 flex justify-between text-h5 font-display">
                 <span>Total</span>
-                <span className="text-forest-800">{formatPrice(total)}</span>
+                <span className="text-forest-800 dark:text-forest-400">{formatPrice(total)}</span>
               </div>
             </div>
 

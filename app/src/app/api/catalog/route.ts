@@ -1,11 +1,25 @@
-import { NextResponse } from 'next/server';
-import squareClient from '@/lib/square/client';
+import { NextRequest, NextResponse } from 'next/server';
+import squareClient, { SQUARE_LOCATION_ID } from '@/lib/square/client';
 import type { CatalogObject } from 'square';
+import { catalogLimiter, getClientIp } from '@/lib/rate-limit';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Rate limiting
+  const ip = getClientIp(request);
+  const limit = catalogLimiter.check(ip);
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again shortly.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(Math.ceil(limit.retryAfterMs / 1000)) },
+      }
+    );
+  }
+
   try {
     const response = await squareClient.catalog.searchItems({
-      enabledLocationIds: [process.env.SQUARE_LOCATION_ID || ''],
+      enabledLocationIds: [SQUARE_LOCATION_ID],
       productTypes: ['REGULAR'],
     });
 
@@ -47,7 +61,14 @@ export async function GET() {
         };
       });
 
-    return NextResponse.json({ products });
+    return NextResponse.json(
+      { products },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+        },
+      }
+    );
   } catch (error) {
     console.error('Square catalog error:', error);
     return NextResponse.json(

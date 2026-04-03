@@ -11,9 +11,12 @@ export default function Home() {
           src="/images/forest-background.jpeg"
           alt=""
           fill
-          className="object-cover opacity-30"
+          className="object-cover opacity-40"
+          style={{ imageRendering: 'auto', filter: 'blur(1px) brightness(0.9)' }}
+          sizes="100vw"
           priority
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest-900/40 via-transparent to-forest-900/60" />
         <div className="relative container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Image
@@ -21,7 +24,8 @@ export default function Home() {
               alt="Sacred Portal Wellness"
               width={220}
               height={220}
-              className="mx-auto mb-8"
+              className="mx-auto mb-8 rounded-full"
+              priority
             />
             <h1 className="text-display font-display text-cream-50 mb-6">
               Sacred Portal Wellness
@@ -44,7 +48,7 @@ export default function Home() {
       </section>
 
       {/* Yoni Seat Feature */}
-      <section className="py-16 bg-cream-500">
+      <section className="py-16 bg-cream-500 dark:bg-charcoal-900">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-square max-w-md mx-auto w-full">
@@ -53,11 +57,12 @@ export default function Home() {
                 alt="Sacred Portal hand-crafted yoni steam seat with heart-shaped opening"
                 fill
                 className="object-cover rounded-lg shadow-lg"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div>
               <h2 className="text-h2 font-display mb-6">The Sacred Portal Yoni Seat</h2>
-              <p className="text-body-lg text-charcoal-700 mb-4">
+              <p className="text-body-lg text-charcoal-700 dark:text-cream-700 mb-4">
                 Hand crafted from cherry hardwood with a skin-safe finisher, our yoni seat is made to
                 ensure durability, beauty and safety for use. It is meant to last one person a lifetime.
               </p>
@@ -86,24 +91,24 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="bg-cream-600 py-16">
+      <section className="bg-cream-600 py-16 dark:bg-charcoal-800">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <h3 className="text-h4 font-display mb-4">Quality Products</h3>
-              <p className="text-body text-charcoal-700">
+              <p className="text-body text-charcoal-700 dark:text-cream-700">
                 Carefully selected herbs and steaming supplies for your wellness practice
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-h4 font-display mb-4">Expert Guidance</h3>
-              <p className="text-body text-charcoal-700">
+              <p className="text-body text-charcoal-700 dark:text-cream-700">
                 Professional coaching from a registered nurse with holistic certification
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-h4 font-display mb-4">Sacred Space</h3>
-              <p className="text-body text-charcoal-700">
+              <p className="text-body text-charcoal-700 dark:text-cream-700">
                 A nurturing community supporting your feminine health journey
               </p>
             </div>
@@ -112,13 +117,13 @@ export default function Home() {
       </section>
 
       {/* Testimonial */}
-      <section className="py-16 bg-forest-50">
+      <section className="py-16 bg-forest-50 dark:bg-forest-900/20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-h2 font-display text-center mb-10">
               How This Work Has Made a Difference
             </h2>
-            <blockquote className="bg-white border border-charcoal-100 rounded-lg p-6 sm:p-8 mb-8">
+            <blockquote className="bg-white border border-charcoal-100 rounded-lg p-6 sm:p-8 dark:bg-charcoal-800 dark:border-charcoal-700 mb-8">
               <p className="text-body-lg italic text-charcoal-800 leading-relaxed">
                 &ldquo;Amber&apos;s approach felt grounded and intentional. I gained clarity around my goals,
                 my values, and the habits that were holding me back. I became more aware of my internal
@@ -130,7 +135,7 @@ export default function Home() {
                 &mdash; Danica C, age 50
               </cite>
             </blockquote>
-            <blockquote className="bg-white border border-charcoal-100 rounded-lg p-6 sm:p-8">
+            <blockquote className="bg-white border border-charcoal-100 rounded-lg p-6 sm:p-8 dark:bg-charcoal-800 dark:border-charcoal-700">
               <p className="text-body-lg italic text-charcoal-800 leading-relaxed">
                 &ldquo;Before we started working together, I had recently been diagnosed with Stage 4
                 Endometriosis. Amber&apos;s ability to cultivate a space that is judgement free and safe to
@@ -157,8 +162,11 @@ export default function Home() {
           src="/images/forest-background.jpeg"
           alt=""
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-30"
+          style={{ imageRendering: 'auto', filter: 'blur(1px) brightness(0.9)' }}
+          sizes="100vw"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest-900/40 via-transparent to-forest-900/60" />
         <div className="relative container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-h2 font-display text-cream-50 mb-6">

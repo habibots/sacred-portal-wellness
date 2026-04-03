@@ -13,16 +13,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={cn(
           'inline-flex items-center justify-center rounded-md font-medium transition-colors',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 dark:focus-visible:ring-forest-400',
           'disabled:opacity-50 disabled:pointer-events-none',
           {
             'bg-forest-800 text-white hover:bg-forest-700 active:bg-forest-900':
               variant === 'primary',
             'bg-moss-600 text-white hover:bg-moss-700 active:bg-moss-800':
               variant === 'secondary',
-            'border-2 border-forest-800 text-forest-800 hover:bg-forest-50':
+            'border-2 border-forest-800 text-forest-800 hover:bg-forest-50 dark:border-forest-400 dark:text-forest-400 dark:hover:bg-forest-900/40':
               variant === 'outline',
-            'text-forest-800 hover:bg-forest-50': variant === 'ghost',
+            'text-forest-800 hover:bg-forest-50 dark:text-forest-400 dark:hover:bg-forest-900/40': variant === 'ghost',
           },
           {
             'h-8 px-3 text-sm': size === 'sm',

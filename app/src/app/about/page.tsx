@@ -10,9 +10,9 @@ export default function AboutPage() {
         <h1 className="text-h1 font-display mb-8 text-center">Meet the Creator</h1>
         
         <div className="prose prose-lg mx-auto">
-          <div className="bg-cream-600 rounded-lg p-8 mb-8">
+          <div className="bg-cream-600 dark:bg-charcoal-800 rounded-lg p-8 mb-8">
             <h2 className="text-h3 font-display mb-4">Amber</h2>
-            <p className="text-h6 text-charcoal-700 mb-4">
+            <p className="text-h6 text-charcoal-700 dark:text-charcoal-300 mb-4">
               RN, BSN, HNB-BC
             </p>
             <p className="text-body-lg">

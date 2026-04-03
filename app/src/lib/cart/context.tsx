@@ -18,25 +18,45 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const CART_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
   // Load cart from localStorage using lazy initialization
   const [items, setItems] = useState<CartItem[]>(() => {
     if (typeof window === 'undefined') return [];
-    const savedCart = localStorage.getItem('sacred-portal-cart');
-    if (savedCart) {
-      try {
-        return JSON.parse(savedCart);
-      } catch (error) {
-        console.error('Failed to load cart:', error);
+    try {
+      const savedCart = localStorage.getItem('sacred-portal-cart');
+      if (!savedCart) return [];
+
+      const parsed = JSON.parse(savedCart);
+
+      // Handle migration from old format (plain array) to new format ({ items, savedAt })
+      if (Array.isArray(parsed)) {
+        return parsed;
+      }
+
+      if (parsed.savedAt && Date.now() - parsed.savedAt > CART_TTL_MS) {
+        localStorage.removeItem('sacred-portal-cart');
         return [];
       }
+
+      return parsed.items || [];
+    } catch (error) {
+      console.warn('Failed to load cart:', error);
+      return [];
     }
-    return [];
   });
   const [isOpen, setIsOpen] = useState(false);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('sacred-portal-cart', JSON.stringify(items));
+    try {
+      localStorage.setItem(
+        'sacred-portal-cart',
+        JSON.stringify({ items, savedAt: Date.now() })
+      );
+    } catch (e) {
+      console.warn('Failed to persist cart to localStorage:', e);
+    }
   }, [items]);
 
   const addItem = (newItem: CartItem) => {
