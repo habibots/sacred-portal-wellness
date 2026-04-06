@@ -45,6 +45,7 @@ const nextConfig: NextConfig = {
     root: '.',
   },
   images: {
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
