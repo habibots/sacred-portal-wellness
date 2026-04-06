@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'About - Sacred Portal Wellness',
-  description: 'Meet Amber, RN, BSN, HNB-BC - Your guide to holistic feminine wellness',
+  description: 'Meet Amber Rodriguez, RN, BSN, HNB-BC - Your guide to holistic feminine wellness',
 };
 
 export default function AboutPage() {
@@ -11,7 +11,7 @@ export default function AboutPage() {
         
         <div className="prose prose-lg mx-auto">
           <div className="bg-cream-600 dark:bg-charcoal-800 rounded-lg p-8 mb-8">
-            <h2 className="text-h3 font-display mb-4">Amber</h2>
+            <h2 className="text-h3 font-display mb-4">Amber Rodriguez</h2>
             <p className="text-h6 text-charcoal-700 dark:text-charcoal-300 mb-4">
               RN, BSN, HNB-BC
             </p>
