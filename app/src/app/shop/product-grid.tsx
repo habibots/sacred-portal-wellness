@@ -49,6 +49,7 @@ export function ProductGrid({ products }: { products: Product[] }) {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  unoptimized
                 />
               ) : (
                 <div className="flex items-center justify-center h-full">

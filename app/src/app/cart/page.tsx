@@ -63,6 +63,7 @@ export default function CartPage() {
                     fill
                     className="object-cover"
                     sizes="96px"
+                    unoptimized
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full">
