@@ -9,19 +9,23 @@ export const metadata = {
 };
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getProducts() {
-  try {
-    const response = await squareClient.catalog.searchItems({
-      enabledLocationIds: [process.env.SQUARE_LOCATION_ID || ''],
-      productTypes: ['REGULAR'],
-    });
+  // Intentionally NOT wrapped in try/catch — if Square fails we want the
+  // error to surface (and show the Next.js error boundary) rather than
+  // silently rendering an empty shop, which can get cached and look like
+  // "Products are loading soon" forever.
+  const response = await squareClient.catalog.searchItems({
+    enabledLocationIds: [process.env.SQUARE_LOCATION_ID || ''],
+    productTypes: ['REGULAR'],
+  });
 
-    const items = (response.items || []) as CatalogObject.Item[];
+  const items = (response.items || []) as CatalogObject.Item[];
 
-    return items
-      .filter((item) => !item.itemData?.isArchived)
-      .map((item) => {
+  return items
+    .filter((item) => !item.itemData?.isArchived)
+    .map((item) => {
         const data = item.itemData;
         const variations = (data?.variations || []) as CatalogObject.ItemVariation[];
         const firstVariation = variations[0];
@@ -49,11 +53,7 @@ async function getProducts() {
             inStock: true,
           })),
         };
-      });
-  } catch (error) {
-    console.error('Failed to fetch products:', error);
-    return [];
-  }
+    });
 }
 
 export default async function ShopPage() {

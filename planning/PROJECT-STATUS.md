@@ -1,281 +1,243 @@
 # Sacred Portal Wellness - Project Status
 
-**Last Updated:** March 12, 2026  
-**Overall Progress:** 10% Complete
+**Last Updated:** April 7, 2026
+**Overall Progress:** ~75% Complete (build complete, pre-launch hardening in progress)
 
 ---
 
 ## 🎯 PROJECT OVERVIEW
 
-**Goal:** Build a professional Next.js website for Sacred Portal Wellness  
-**Domain:** sacredportalwellness.com  
-**Tech Stack:** Next.js, Vercel, Square, TailwindCSS  
-**Owner:** Amber (RN, BSN, HC-NC)
+**Goal:** Build a professional Next.js website for Sacred Portal Wellness
+**Domain:** sacredportalwellness.com
+**Tech Stack:** Next.js (App Router) + TypeScript + TailwindCSS, Square e-commerce, Cloudflare Workers hosting
+**Owner:** Amber Rodriguez (RN, BSN, HC-NC)
 
 ---
 
 ## 📊 PHASE STATUS
 
-| Phase | Status | Progress | Next Action |
-|-------|--------|----------|-------------|
-| **Phase 1: Discovery** | ✅ Complete | 90% | Gather missing items (logo, products, pricing) |
-| **Phase 2: Domain/Email** | 📋 Planned | 0% | Begin implementation |
-| **Phase 3: Design** | ⏳ Pending | 0% | Awaiting Phase 2 start |
-| **Phase 4: Content** | ⏳ Pending | 0% | Awaiting Phase 3 |
-| **Phase 5: Build** | ⏳ Pending | 0% | Awaiting Phase 4 |
-| **Phase 6: SEO** | ⏳ Pending | 0% | Awaiting Phase 5 |
-| **Phase 7: Testing** | ⏳ Pending | 0% | Awaiting Phase 5 |
-| **Phase 8: Launch** | ⏳ Pending | 0% | Awaiting Phase 7 |
-| **Phase 9: Security** | ⏳ Pending | 0% | Awaiting Phase 8 |
+| Phase | Status | Progress | Notes |
+|-------|--------|----------|-------|
+| **Phase 1: Discovery** | ✅ Complete | 100% | Brand, content, SEO strategy locked |
+| **Phase 2: Domain/Email** | 🔄 In Progress | ~50% | Domain/Workers deploy in place; Google Workspace TBD |
+| **Phase 3: Design** | ✅ Complete | 100% | Homepage redesigned per client feedback |
+| **Phase 4: Content** | ✅ Complete | 95% | All core pages live; awaiting more testimonials |
+| **Phase 5: Build** | ✅ Complete | 95% | Site built, deployed to Cloudflare Workers |
+| **Phase 6: SEO** | 🔄 In Progress | 70% | Metadata + essentials done; GSC/GA verification pending |
+| **Phase 7: Testing** | 🔄 In Progress | 40% | A11y baseline in place; full QA pass pending |
+| **Phase 8: Launch** | ⏳ Pending | 0% | Awaiting final QA + DNS cutover |
+| **Phase 9: Security** | 🔄 In Progress | 60% | Hardening done; debug-exposure flag still needs revert |
 
 ---
 
 ## ✅ COMPLETED WORK
 
-### Phase 1: Discovery & Asset Collection (90%)
+### Phase 1: Discovery & Asset Collection
+- Brand identity: Forest Green #1B5E20, white, black; apothecary serif + clean sans
+- Visual motifs: moss, forest, sacred geometry
+- Brand voice: earthy, professional, empowering
+- Homepage copy, About/creator bio, coaching program, "What is Yoni Steaming"
+- 1 approved testimonial (R.S.) with 3 variants
+- SEO: 11 target keywords, audience (women 20–40), San Diego focus
+- 15+ planning documents, brand guidelines, asset inventory
 
-**Brand Identity:**
-- ✅ Colors defined (Forest Green #1B5E20, White, Black)
-- ✅ Typography selected (Apothecary serif + clean sans-serif)
-- ✅ Visual motifs documented (moss, forest, sacred geometry)
-- ✅ Brand voice established (earthy, professional, empowering)
+### Phase 2: Domain, Email & Accounts (partial)
+- Cloudflare Workers deployment configured
+- Package renamed to `sacred-portal-wellness` for Worker binding
+- Square API credentials configured and integrated
+- ⏳ Still pending: Google Workspace (business@/info@), Google Business Profile verification
 
-**Content:**
-- ✅ Homepage copy extracted
-- ✅ About/creator bio complete
-- ✅ Coaching program details documented
-- ✅ Educational content (What is Yoni Steaming)
-- ✅ 1 testimonial approved (3 variants)
+### Phase 3: Design
+- Homepage fully redesigned per client feedback
+- Navigation restructured
+- Coaching page redesigned
+- FAQ section added
+- Testimonials section integrated
 
-**Strategy:**
-- ✅ SEO keywords identified (11 keywords)
-- ✅ Target audience defined (Women 20-40)
-- ✅ Geographic focus (San Diego, CA)
-- ✅ Site structure mapped
+### Phase 4: Content
+- Homepage, About (with Amber Rodriguez), Coaching, Shop, Contact, FAQ all live
+- Approved testimonial integrated on homepage and coaching page
+- Educational content on yoni steaming published
 
-**Documentation:**
-- ✅ 15+ planning documents created
-- ✅ Complete asset inventory
-- ✅ Brand guidelines
-- ✅ SEO strategy
+### Phase 5: Build (Implementation)
+**Core build (commits `a59dcdb` → `445f476`, March 12 – April 6, 2026):**
+
+- ✅ Next.js App Router scaffold with TypeScript + Tailwind
+- ✅ **Square e-commerce integration** — Catalog, Orders, Payments, Web Payments SDK
+- ✅ Server-side product fetching on shop page (fresh data per request)
+- ✅ Mobile-responsive header
+- ✅ Contact form
+- ✅ Approved testimonial component
+- ✅ Major client-feedback revision: homepage redesign, nav update, coaching page, FAQ, testimonials
+- ✅ **Security hardening** — headers, input validation
+- ✅ **Accessibility baseline** — WCAG-aware markup, focus states
+- ✅ **Dark mode** support
+- ✅ **Performance optimizations**
+- ✅ **Error handling** + error boundaries
+- ✅ **CI configuration** added
+- ✅ Cleanup of stale root `src/public` dirs
+- ✅ Square client refactored for build compatibility
+- ✅ **Cloudflare Workers compatibility:** package rename for Worker binding, Next.js image optimization disabled globally, Square product images served unoptimized
+- ✅ About page updated with Amber's last name (Rodriguez) — heading + metadata
+- ✅ **SEO essentials** — metadata improvements, cleanup pass
+
+### Phase 6: SEO (in progress)
+- ✅ Metadata across pages
+- ✅ Page titles and descriptions
+- ⏳ Google Search Console verification
+- ⏳ Google Analytics installation
+- ⏳ Sitemap submission
+- ⏳ Google Business Profile
+
+### Phase 9: Security (in progress)
+- ✅ Security headers
+- ✅ Input validation
+- ⚠️ **`6e081dc` temporarily exposed Square API errors for debugging — must be reverted before launch**
 
 ---
 
-## 🚧 IN PROGRESS
+## 🚧 IN PROGRESS / IMMEDIATE NEXT STEPS
 
-### Phase 2: Domain, Email, and Account Setup (0%)
-
-**Planning Complete:**
-- ✅ Phase 2 overview document
-- ✅ Step-by-step implementation guide
-- ✅ DNS configuration reference
-- ✅ Security checklist
-- ✅ Cost breakdown and timeline
-
-**Ready to Implement:**
-- 📋 Domain registration (sacredportalwellness.com)
-- 📋 Google Workspace setup (2 email accounts)
-- 📋 Google Business Profile creation
-- 📋 Square API configuration
-
-**Estimated Time:** 2-4 hours active work + 5-14 days for Google verification
+1. **Revert debug exposure** (`6e081dc`) — Square API errors should not leak in production
+2. **Commit `.github/` directory** — currently untracked; finalize CI workflows
+3. **Google Workspace setup** — business@ and info@ email accounts
+4. **Google Business Profile** — create + verify (5–14 day verification window)
+5. **Google Analytics + Search Console** — install and verify
+6. **Full QA pass** — accessibility (axe-core, Lighthouse, VoiceOver, keyboard), cross-browser, mobile
+7. **DNS cutover** to sacredportalwellness.com (if not yet pointed at Workers)
+8. **Gather more testimonials** for ongoing content
 
 ---
 
-## ⚠️ BLOCKERS & MISSING ITEMS
+## ⚠️ KNOWN ISSUES / TECH DEBT
 
-### Critical (Required for Full Site)
-1. **Logo File** - Need SVG/PNG without white background
-2. **Square Product Data** - Complete catalog with prices, descriptions, images
-3. **Coaching Pricing** - Program cost and payment options
-
-### Phase 2 Requirements
-4. **Payment Method** - For domain ($10.44) and email ($14/month)
-5. **Square Account Access** - To generate API credentials
-
-### Nice-to-Have
-6. Additional testimonials
-7. Professional product photos
-8. Legal page content (can use templates)
+- `6e081dc` — Square API error exposure (debug-only, must revert)
+- `.github/` workflows untracked
+- Google Workspace email not yet set up
+- Lighthouse score not yet verified at 90+ across all categories
 
 ---
 
 ## 💰 BUDGET SUMMARY
 
-### One-Time Costs
+### One-Time
 | Item | Cost | Status |
 |------|------|--------|
-| Domain registration | $10.44 | Not purchased |
+| Domain registration | $10.44 | ✅ Acquired |
 
 ### Monthly Recurring
 | Item | Cost | Status |
 |------|------|--------|
 | Google Workspace (2 users) | $14.00 | Not set up |
-| Vercel hosting | $0-20 | Not needed yet |
+| Cloudflare Workers | $0–5 | ✅ Active |
 
 ### Transaction-Based
-| Item | Cost | Notes |
-|------|------|-------|
-| Square payments | 2.9% + $0.30 | Per sale |
-
-**First Month Total:** $24.44  
-**Monthly After:** $14.00  
-**Annual Cost:** ~$178.44
+| Item | Cost |
+|------|------|
+| Square payments | 2.9% + $0.30 per sale |
 
 ---
 
 ## 📅 TIMELINE
 
 ### Completed
-- **March 12, 2026** - Phase 1 complete (90%)
-- **March 12, 2026** - Phase 2 planning complete
+- **2026-03-12** — Phase 1 complete; initial Next.js scaffold + Sacred Portal site
+- **2026-03-19** — Square e-commerce integration, server-side shop fetch, mobile header, contact form, R.S. testimonial
+- **2026-04-01** — Major client feedback round: homepage redesign, nav, coaching, FAQ, testimonials
+- **2026-04-03** — Security/a11y/dark mode/perf/error handling/CI; Square build fix
+- **2026-04-06** — Cloudflare Workers compatibility, About page update, debug exposure (temporary), SEO + metadata pass
 
 ### Upcoming
-- **TBD** - Phase 2 implementation (2-4 hours)
-- **TBD + 5-14 days** - Google Business Profile verified
-- **TBD** - Phase 3 design mockups
-- **TBD** - Phase 5 development begins
-- **TBD** - Website launch
-
-**Note:** Timeline depends on when Phase 2 implementation begins and how quickly missing items are provided.
+- Revert debug commit, commit `.github/` workflows
+- Google Workspace + Business Profile
+- Final QA and Lighthouse audit
+- Launch
 
 ---
 
-## 🎯 IMMEDIATE NEXT STEPS
+## 🎨 TECH STACK (Confirmed in Build)
 
-### For Client (Amber)
-1. **Provide payment method** for domain and email setup
-2. **Gather missing items:**
-   - Logo file (SVG/PNG)
-   - Square product export or API access
-   - Coaching program pricing
-3. **Review Phase 2 planning** documents
-4. **Decide when to start** Phase 2 implementation
+**Frontend:** Next.js (App Router), React, TypeScript, TailwindCSS
+**Hosting:** Cloudflare Workers (changed from originally planned Vercel)
+**DNS/CDN:** Cloudflare
+**E-Commerce:** Square Catalog / Orders / Payments / Web Payments SDK
+**Email:** Google Workspace (planned)
+**SEO/Analytics:** Google Business Profile, Analytics, Search Console (pending)
+**Accessibility:** WCAG 2.1 AA target — axe-core, Lighthouse, VoiceOver, keyboard
 
-### For Developer/Team
-1. **Wait for client approval** to proceed with Phase 2
-2. **Review Phase 2 documentation:**
-   - `PHASE-2-START-HERE.md` - Quick orientation
-   - `phases/phase-02-implementation-guide.md` - Detailed steps
-3. **Prepare for Phase 3** (design) - can start in parallel
-
----
-
-## 📂 KEY DOCUMENTS
-
-### Getting Started
-- **`/planning/PHASE-2-START-HERE.md`** - Start here for Phase 2
-- **`/planning/assets/00-START-HERE.md`** - Phase 1 overview
-
-### Phase 1 (Complete)
-- **`/planning/assets/01-QUICK-REFERENCE.md`** - Quick facts
-- **`/planning/assets/02-WHAT-WE-HAVE.md`** - Complete inventory
-- **`/planning/assets/03-WHAT-WE-NEED.md`** - Missing items
-- **`/planning/assets/brand/brand-summary.md`** - Brand guidelines
-- **`/planning/assets/seo-strategy.md`** - SEO strategy
-
-### Phase 2 (Planned)
-- **`/planning/phases/phase-02-domain-email-accounts.md`** - Overview
-- **`/planning/phases/phase-02-implementation-guide.md`** - Step-by-step
-- **`/planning/phases/phase-02-dns-reference.md`** - DNS config
-- **`/planning/phases/phase-02-security-checklist.md`** - Security
-
-### Research & Planning
-- **`/planning/01-high-level-plan.md`** - Original 9-phase plan
-- **`/planning/02-research-review.md`** - Tech stack decisions
-- **`/planning/03-accessibility-and-qa-research.md`** - WCAG standards
-
----
-
-## 🎨 TECH STACK (Confirmed)
-
-**Frontend:**
-- Next.js (App Router)
-- React
-- TailwindCSS
-- TypeScript (recommended)
-
-**Hosting & Infrastructure:**
-- Vercel (hosting)
-- Cloudflare (DNS, CDN, security)
-
-**E-Commerce:**
-- Square Catalog API (products)
-- Square Orders API (cart/checkout)
-- Square Payments API (transactions)
-- Square Web Payments SDK (card entry)
-
-**Email:**
-- Google Workspace (business@, info@)
-
-**SEO & Analytics:**
-- Google Business Profile
-- Google Analytics
-- Google Search Console
-
-**Accessibility:**
-- WCAG 2.1 AA compliance
-- Automated testing (axe-core, Lighthouse)
-- Manual testing (VoiceOver, keyboard navigation)
+> ⚠️ **Stack change from original plan:** Hosting moved from Vercel → Cloudflare Workers. This drove several build/image-handling adjustments (image optimization disabled, Square images unoptimized, package renamed for Worker binding).
 
 ---
 
 ## 📈 SUCCESS METRICS
 
 ### Launch Goals
-- [ ] Website live at sacredportalwellness.com
-- [ ] All products from Square catalog displayed
-- [ ] Working checkout flow
+- [x] Site built with full product catalog from Square
+- [x] Working checkout flow (Square)
+- [x] Mobile-responsive
+- [x] Accessibility baseline
+- [ ] Live at sacredportalwellness.com (DNS cutover confirmed)
 - [ ] Google Business Profile verified
 - [ ] Professional email operational
-- [ ] WCAG 2.1 AA compliant
-- [ ] Lighthouse score 90+ (all categories)
+- [ ] Lighthouse score 90+ (all categories) verified
+- [ ] Debug exposure reverted
 
 ### Post-Launch (3 Months)
 - [ ] 20+ Google reviews
-- [ ] Ranking for local keywords (yoni steaming San Diego)
+- [ ] Ranking for "yoni steaming San Diego"
 - [ ] Regular blog posts (2/month)
-- [ ] Growing email list
-- [ ] Conversion tracking active
+- [ ] Email list growth
+- [ ] Conversion tracking
 
 ---
 
 ## 🔄 CHANGE LOG
 
-**March 12, 2026:**
-- Phase 1 completed (90%)
-- Phase 2 planning completed
-- Created comprehensive documentation:
-  - 4 Phase 2 planning documents
-  - Phase overview and index
-  - Project status summary
-- Ready to begin Phase 2 implementation
+**2026-04-07:**
+- Major status update — reconciled doc with actual git history (15 commits)
+- Project re-scoped from "10% / Phase 1 only" to ~75% complete
+- Documented stack change (Vercel → Cloudflare Workers) and all build work
+- Flagged debug-exposure commit and untracked `.github/` as pre-launch blockers
+
+**2026-04-06:**
+- Cloudflare Workers compat fixes, SEO + metadata pass, About page update
+
+**2026-04-03:**
+- Security, accessibility, dark mode, performance, error handling, CI added
+
+**2026-04-01:**
+- Client feedback round: homepage, nav, coaching, FAQ, testimonials
+
+**2026-03-19:**
+- Square e-commerce live, mobile header, contact form, first testimonial
+
+**2026-03-12:**
+- Phase 1 complete, initial site scaffold
 
 ---
 
 ## 📞 CONTACT
 
-**Business Owner:** Amber  
-**Email:** aahmm9966@gmail.com  
-**Instagram:** @saacredportal  
-**Current Site:** https://sacredportalwellness.square.site/
+**Business Owner:** Amber Rodriguez
+**Email:** aahmm9966@gmail.com
+**Instagram:** @saacredportal
+**Legacy Site:** https://sacredportalwellness.square.site/
 
 ---
 
 ## 🎯 CURRENT PRIORITY
 
-**Focus:** Begin Phase 2 implementation
+**Focus:** Pre-launch hardening and final accounts setup
 
-**Action Required:** Client approval and payment method to proceed with:
-1. Domain registration
-2. Email setup
-3. Google Business Profile
-4. Square API configuration
-
-**Estimated Time to Complete Phase 2:** 2-4 hours + 5-14 days verification
+**Critical path to launch:**
+1. Revert `6e081dc` (Square API error exposure)
+2. Commit `.github/` CI workflows
+3. Google Workspace + Business Profile
+4. Final QA + Lighthouse audit
+5. DNS cutover and launch
 
 ---
 
-**Project Status:** ON TRACK ✅  
-**Next Milestone:** Phase 2 Complete  
-**Overall Progress:** 10% Complete
+**Project Status:** ON TRACK ✅
+**Next Milestone:** Pre-launch QA complete
+**Overall Progress:** ~75% Complete
