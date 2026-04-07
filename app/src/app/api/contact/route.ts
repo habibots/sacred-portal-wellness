@@ -1,19 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ContactFormSchema, sanitizeString } from '@/lib/validation/schemas';
-import { contactLimiter, getClientIp } from '@/lib/rate-limit';
+import { isAllowedOrigin } from '@/lib/security/origin';
 
 export async function POST(request: NextRequest) {
-  // Rate limiting
-  const ip = getClientIp(request);
-  const limit = contactLimiter.check(ip);
-  if (!limit.allowed) {
-    return NextResponse.json(
-      { error: 'Too many requests. Please try again shortly.' },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(Math.ceil(limit.retryAfterMs / 1000)) },
-      }
-    );
+  // CSRF defense: only accept requests from our own origin.
+  if (!isAllowedOrigin(request)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
   try {

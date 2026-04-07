@@ -1,22 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import squareClient, { SQUARE_LOCATION_ID } from '@/lib/square/client';
 import type { CatalogObject } from 'square';
-import { catalogLimiter, getClientIp } from '@/lib/rate-limit';
 
-export async function GET(request: NextRequest) {
-  // Rate limiting
-  const ip = getClientIp(request);
-  const limit = catalogLimiter.check(ip);
-  if (!limit.allowed) {
-    return NextResponse.json(
-      { error: 'Too many requests. Please try again shortly.' },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(Math.ceil(limit.retryAfterMs / 1000)) },
-      }
-    );
-  }
-
+export async function GET() {
   try {
     const response = await squareClient.catalog.searchItems({
       enabledLocationIds: [SQUARE_LOCATION_ID],

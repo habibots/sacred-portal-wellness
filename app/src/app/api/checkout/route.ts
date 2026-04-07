@@ -3,20 +3,12 @@ import squareClient, { SQUARE_LOCATION_ID } from '@/lib/square/client';
 import type { CatalogObject } from 'square';
 import { randomUUID } from 'crypto';
 import { CheckoutRequestSchema, sanitizeString } from '@/lib/validation/schemas';
-import { checkoutLimiter, getClientIp } from '@/lib/rate-limit';
+import { isAllowedOrigin } from '@/lib/security/origin';
 
 export async function POST(request: NextRequest) {
-  // Rate limiting
-  const ip = getClientIp(request);
-  const limit = checkoutLimiter.check(ip);
-  if (!limit.allowed) {
-    return NextResponse.json(
-      { error: 'Too many requests. Please try again shortly.' },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(Math.ceil(limit.retryAfterMs / 1000)) },
-      }
-    );
+  // CSRF defense: only accept requests from our own origin.
+  if (!isAllowedOrigin(request)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
   try {
@@ -82,7 +74,14 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    if (!siteUrl) {
+      console.error('NEXT_PUBLIC_SITE_URL is not set; refusing to create checkout');
+      return NextResponse.json(
+        { error: 'Server is misconfigured. Please contact support.' },
+        { status: 500 }
+      );
+    }
 
     // Build line items using server-verified prices
     const lineItems = sanitizedItems.map((item) => {
