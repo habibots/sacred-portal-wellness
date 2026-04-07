@@ -2,9 +2,68 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  name: "Sacred Portal Wellness",
+  description:
+    "Hand-crafted yoni steam herbs, salves, and yoni steam seats. Holistic nurse coaching for women's hormonal, cycle, digestive, and emotional wellness.",
+  url: "https://sacredportalwellness.com",
+  image: "https://sacredportalwellness.com/images/logo-wellness.png",
+  founder: {
+    "@type": "Person",
+    name: "Amber Rodriguez",
+    jobTitle: "Registered Nurse, Holistic Health Coach",
+    description: "RN, BSN, HNB-BC",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "San Diego",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Diego",
+    addressRegion: "CA",
+    addressCountry: "US",
+  },
+  sameAs: ["https://instagram.com/saacredportal"],
+  priceRange: "$$",
+  makesOffer: [
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "The Sacred Portal Path",
+        description:
+          "12-week 1:1 holistic nurse coaching program for women's hormonal, cycle, and digestive wellness.",
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Product",
+        name: "Yoni Steam Herbs",
+        description: "Small batch herbal blends for yoni steaming",
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Product",
+        name: "Sacred Portal Yoni Seat",
+        description: "Hand-crafted cherry hardwood yoni steam seat",
+      },
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+      />
       {/* Hero Section - Dark green with forest background */}
       <section className="relative bg-forest-900 py-24 overflow-hidden">
         <Image

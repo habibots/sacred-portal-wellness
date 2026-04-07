@@ -71,15 +71,8 @@ export async function GET(request: NextRequest) {
     );
   } catch (error) {
     console.error('Square catalog error:', error);
-    const message = error instanceof Error ? error.message : String(error);
-    const details = error && typeof error === 'object' && 'errors' in error
-      ? (error as { errors: unknown }).errors
-      : undefined;
     return NextResponse.json(
-      {
-        error: 'Failed to fetch products',
-        debug: { message, details, locationId: SQUARE_LOCATION_ID }
-      },
+      { error: 'Failed to fetch products' },
       { status: 500 }
     );
   }
