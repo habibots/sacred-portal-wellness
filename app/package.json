@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
     "lighthouse": "lhci autorun",
-    "lint:a11y": "pa11y http://localhost:3000 http://localhost:3000/about http://localhost:3000/faq http://localhost:3000/contact http://localhost:3000/coaching http://localhost:3000/testimonials http://localhost:3000/cart http://localhost:3000/shop"
+    "lint:a11y": "pa11y http://localhost:3000 http://localhost:3000/about http://localhost:3000/faq http://localhost:3000/contact http://localhost:3000/coaching http://localhost:3000/testimonials http://localhost:3000/cart http://localhost:3000/shop",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.18.0",
     "clsx": "^2.1.1",
     "next": "^16.2.2",
     "next-themes": "^0.4.6",
@@ -32,6 +37,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.80.0"
   }
 }
