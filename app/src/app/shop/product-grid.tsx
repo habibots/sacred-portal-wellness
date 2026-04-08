@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useCart } from '@/lib/cart/context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -14,6 +15,7 @@ interface Product {
   price: number;
   images: string[];
   inStock: boolean;
+  slug: string;
   variants: { id: string; name: string; price: number; inStock: boolean }[];
 }
 
@@ -41,7 +43,11 @@ export function ProductGrid({ products }: { products: Product[] }) {
       {products.map((product) => (
         <Card key={product.id} className="h-full hover:shadow-lg transition-shadow">
           <CardHeader className="p-0">
-            <div className="relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-t-lg overflow-hidden">
+            <Link
+              href={`/shop/${product.slug}`}
+              className="block relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-t-lg overflow-hidden"
+              aria-label={`View details for ${product.name}`}
+            >
               {product.images[0] ? (
                 <Image
                   src={product.images[0]}
@@ -56,10 +62,17 @@ export function ProductGrid({ products }: { products: Product[] }) {
                   <span className="text-charcoal-400">Product Image</span>
                 </div>
               )}
-            </div>
+            </Link>
           </CardHeader>
           <CardContent className="p-4">
-            <h3 className="text-h6 font-display mb-2">{product.name}</h3>
+            <h3 className="text-h6 font-display mb-2">
+              <Link
+                href={`/shop/${product.slug}`}
+                className="hover:text-forest-800 dark:hover:text-forest-400 transition-colors"
+              >
+                {product.name}
+              </Link>
+            </h3>
             <p className="text-body-sm text-charcoal-600 dark:text-charcoal-300 line-clamp-2 mb-4">
               {product.description}
             </p>

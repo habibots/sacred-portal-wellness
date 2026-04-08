@@ -70,7 +70,7 @@ export default function OfferOutlinePage() {
               <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src="/images/transformation-1.jpeg"
-                  alt="Transformation journey"
+                  alt="Amber before her wellness transformation, showing the starting point of her 10-year healing journey"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -79,7 +79,7 @@ export default function OfferOutlinePage() {
               <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src="/images/transformation-2.jpeg"
-                  alt="Transformation journey"
+                  alt="Amber after her wellness transformation, embodying the holistic practices she now coaches"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"

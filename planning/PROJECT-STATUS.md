@@ -1,7 +1,7 @@
 # Sacred Portal Wellness - Project Status
 
-**Last Updated:** April 7, 2026
-**Overall Progress:** ~75% Complete (build complete, pre-launch hardening in progress)
+**Last Updated:** April 8, 2026
+**Overall Progress:** ~88% Complete (build + security hardening complete; awaiting Google account work and contact form wiring)
 
 ---
 
@@ -22,11 +22,11 @@
 | **Phase 2: Domain/Email** | 🔄 In Progress | ~50% | Domain/Workers deploy in place; Google Workspace TBD |
 | **Phase 3: Design** | ✅ Complete | 100% | Homepage redesigned per client feedback |
 | **Phase 4: Content** | ✅ Complete | 95% | All core pages live; awaiting more testimonials |
-| **Phase 5: Build** | ✅ Complete | 95% | Site built, deployed to Cloudflare Workers |
-| **Phase 6: SEO** | 🔄 In Progress | 70% | Metadata + essentials done; GSC/GA verification pending |
-| **Phase 7: Testing** | 🔄 In Progress | 40% | A11y baseline in place; full QA pass pending |
-| **Phase 8: Launch** | ⏳ Pending | 0% | Awaiting final QA + DNS cutover |
-| **Phase 9: Security** | 🔄 In Progress | 60% | Hardening done; debug-exposure flag still needs revert |
+| **Phase 5: Build** | ✅ Complete | 100% | Site built, live on Cloudflare Workers, product detail pages added |
+| **Phase 6: SEO** | 🔄 In Progress | 85% | Metadata, sitemap (with products), product JSON-LD done; GSC/GA verification pending |
+| **Phase 7: Testing** | 🔄 In Progress | 50% | A11y baseline, security pass done; full QA + Lighthouse audit pending |
+| **Phase 8: Launch** | ⏳ Pending | 10% | Site is technically live; pending real Square checkout test + announcement |
+| **Phase 9: Security** | ✅ Complete | 95% | All identified blockers fixed; rate limiting moved to Cloudflare WAF |
 
 ---
 
@@ -98,23 +98,21 @@
 
 ## 🚧 IN PROGRESS / IMMEDIATE NEXT STEPS
 
-1. **Revert debug exposure** (`6e081dc`) — Square API errors should not leak in production
-2. **Commit `.github/` directory** — currently untracked; finalize CI workflows
-3. **Google Workspace setup** — business@ and info@ email accounts
-4. **Google Business Profile** — create + verify (5–14 day verification window)
-5. **Google Analytics + Search Console** — install and verify
-6. **Full QA pass** — accessibility (axe-core, Lighthouse, VoiceOver, keyboard), cross-browser, mobile
-7. **DNS cutover** to sacredportalwellness.com (if not yet pointed at Workers)
-8. **Gather more testimonials** for ongoing content
+**Owner-side (require human/account access):**
+1. **Google Workspace setup** — business@ and info@ email accounts
+2. **Google Business Profile** — create + verify (5–14 day verification window)
+3. **Google Analytics + Search Console** — install, verify, submit sitemap
+4. **Contact form email delivery** — wire `/api/contact` to Resend, Google Apps Script, or similar (currently logs to console only)
+5. **Real end-to-end Square checkout test** — buy a test product with a real card to confirm full flow
+6. **Gather more testimonials** for ongoing content
 
 ---
 
 ## ⚠️ KNOWN ISSUES / TECH DEBT
 
-- `6e081dc` — Square API error exposure (debug-only, must revert)
-- `.github/` workflows untracked
-- Google Workspace email not yet set up
+- Contact form `/api/contact` logs submissions to console but does not deliver them anywhere (intentional placeholder until Google Workspace email is set up)
 - Lighthouse score not yet verified at 90+ across all categories
+- Some coaching pages still use generic alt text on imagery (most fixed in 2026-04-08 pass)
 
 ---
 
@@ -193,11 +191,26 @@
 
 ## 🔄 CHANGE LOG
 
-**2026-04-07:**
-- Major status update — reconciled doc with actual git history (15 commits)
-- Project re-scoped from "10% / Phase 1 only" to ~75% complete
+**2026-04-08:**
+- Added product detail pages at `/shop/[slug]` with image gallery, description, add-to-cart, and Product JSON-LD
+- Sitemap now dynamically includes all Square products
+- Improved alt text on transformation imagery for accessibility
+- Extracted Square product fetching to a shared lib for reuse across shop list, detail pages, and sitemap
+
+**2026-04-07 (later):**
+- Pre-launch security pass:
+  - `/checkout/success` now verifies the Square order before showing success (previously could be spoofed by direct visit)
+  - CSRF defense added to `/api/checkout` and `/api/contact` via Origin header check
+  - Removed broken in-memory rate limiter (didn't work across Worker isolates); rate limiting moved to Cloudflare WAF rule (30 req/min per IP on `/api/*`)
+  - Removed `localhost:3000` fallback in checkout route
+- Fixed long-broken shop deployment:
+  - Diagnosed why shop showed "Products are loading soon" — `try/catch` swallowed Square errors and prerendered the empty state, which then got cached for a year
+  - Added `wrangler.jsonc`, `open-next.config.ts`, and `@opennextjs/cloudflare`/`wrangler` dev deps so deploys are reproducible from this repo
+  - Replaced silent error swallowing with `force-dynamic` + `revalidate = 0` and let errors propagate to the Next.js error boundary
+
+**2026-04-07 (earlier):**
+- Major status update — reconciled doc with actual git history
 - Documented stack change (Vercel → Cloudflare Workers) and all build work
-- Flagged debug-exposure commit and untracked `.github/` as pre-launch blockers
 
 **2026-04-06:**
 - Cloudflare Workers compat fixes, SEO + metadata pass, About page update
@@ -227,17 +240,18 @@
 
 ## 🎯 CURRENT PRIORITY
 
-**Focus:** Pre-launch hardening and final accounts setup
+**Focus:** Account setup (Google Workspace, GBP, GA), contact form delivery, final QA
 
-**Critical path to launch:**
-1. Revert `6e081dc` (Square API error exposure)
-2. Commit `.github/` CI workflows
-3. Google Workspace + Business Profile
-4. Final QA + Lighthouse audit
-5. DNS cutover and launch
+**Critical path to public launch:**
+1. Wire contact form to email delivery (Resend or Google Apps Script)
+2. Google Workspace email accounts created
+3. Google Business Profile submitted (long verification window — start now)
+4. Real end-to-end Square checkout test with a real card
+5. Lighthouse 90+ across all categories
+6. Public announcement / soft launch
 
 ---
 
 **Project Status:** ON TRACK ✅
-**Next Milestone:** Pre-launch QA complete
-**Overall Progress:** ~75% Complete
+**Next Milestone:** Contact form delivery + Google accounts in place
+**Overall Progress:** ~88% Complete

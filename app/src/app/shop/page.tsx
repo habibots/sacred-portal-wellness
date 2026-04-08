@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { ProductGrid } from './product-grid';
-import squareClient from '@/lib/square/client';
-import type { CatalogObject } from 'square';
+import { getProducts } from '@/lib/square/products';
 
 export const metadata = {
   title: 'Sacred Portal Apothecary - Sacred Portal Wellness',
@@ -11,52 +10,11 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-async function getProducts() {
+export default async function ShopPage() {
   // Intentionally NOT wrapped in try/catch — if Square fails we want the
   // error to surface (and show the Next.js error boundary) rather than
   // silently rendering an empty shop, which can get cached and look like
   // "Products are loading soon" forever.
-  const response = await squareClient.catalog.searchItems({
-    enabledLocationIds: [process.env.SQUARE_LOCATION_ID || ''],
-    productTypes: ['REGULAR'],
-  });
-
-  const items = (response.items || []) as CatalogObject.Item[];
-
-  return items
-    .filter((item) => !item.itemData?.isArchived)
-    .map((item) => {
-        const data = item.itemData;
-        const variations = (data?.variations || []) as CatalogObject.ItemVariation[];
-        const firstVariation = variations[0];
-        const priceMoney = firstVariation?.itemVariationData?.priceMoney;
-        const images: string[] = data?.ecomImageUris || [];
-
-        return {
-          id: item.id,
-          name: data?.name || '',
-          description: data?.descriptionPlaintext || data?.description || '',
-          price: priceMoney ? Number(priceMoney.amount) / 100 : 0,
-          images,
-          category: data?.categoryId || '',
-          inStock: true,
-          slug: (data?.name || '')
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/(^-|-$)/g, ''),
-          variants: variations.map((v) => ({
-            id: v.id,
-            name: v.itemVariationData?.name || '',
-            price: v.itemVariationData?.priceMoney
-              ? Number(v.itemVariationData.priceMoney.amount) / 100
-              : 0,
-            inStock: true,
-          })),
-        };
-    });
-}
-
-export default async function ShopPage() {
   const products = await getProducts();
 
   return (
@@ -78,7 +36,7 @@ export default async function ShopPage() {
       {products.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-body-lg text-charcoal-500 dark:text-charcoal-400 mb-2">
-            Products are loading soon.
+            No products are currently available.
           </p>
           <p className="text-body text-charcoal-400 dark:text-charcoal-500">
             Please check back shortly or contact us for product inquiries.
