@@ -40,18 +40,23 @@ export function ProductGrid({ products }: { products: Product[] }) {
     <>
     <div aria-live="polite" className="sr-only">{announcement}</div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((product) => (
+      {products.map((product) => {
+        const titleId = `product-title-${product.id}`;
+        return (
         <Card key={product.id} className="h-full hover:shadow-lg transition-shadow">
           <CardHeader className="p-0">
+            {/* Single canonical link for the whole card preview, labelled by
+                the title element below to avoid having two screen-reader
+                announcements for the same destination. */}
             <Link
               href={`/shop/${product.slug}`}
+              aria-labelledby={titleId}
               className="block relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-t-lg overflow-hidden"
-              aria-label={`View details for ${product.name}`}
             >
               {product.images[0] ? (
                 <Image
                   src={product.images[0]}
-                  alt={product.name}
+                  alt=""
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -65,13 +70,8 @@ export function ProductGrid({ products }: { products: Product[] }) {
             </Link>
           </CardHeader>
           <CardContent className="p-4">
-            <h3 className="text-h6 font-display mb-2">
-              <Link
-                href={`/shop/${product.slug}`}
-                className="hover:text-forest-800 dark:hover:text-forest-400 transition-colors"
-              >
-                {product.name}
-              </Link>
+            <h3 id={titleId} className="text-h6 font-display mb-2">
+              {product.name}
             </h3>
             <p className="text-body-sm text-charcoal-600 dark:text-charcoal-300 line-clamp-2 mb-4">
               {product.description}
@@ -90,7 +90,8 @@ export function ProductGrid({ products }: { products: Product[] }) {
             </div>
           </CardContent>
         </Card>
-      ))}
+        );
+      })}
     </div>
     </>
   );

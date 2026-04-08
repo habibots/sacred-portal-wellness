@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useCart } from '@/lib/cart/context';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
@@ -17,7 +18,11 @@ const navLinks = [
 
 export function Header() {
   const { summary } = useCart();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
 
@@ -77,16 +82,24 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-body hover:text-forest-800 dark:hover:text-forest-400 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-6" aria-label="Main">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-body transition-colors hover:text-forest-800 dark:hover:text-forest-400 ${
+                    active
+                      ? 'text-forest-800 dark:text-forest-400 font-semibold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/cart"
               className="relative text-body hover:text-forest-800 transition-colors"
@@ -172,18 +185,29 @@ export function Header() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <nav id="mobile-menu" ref={menuRef} className="md:hidden border-t border-charcoal-100 bg-white dark:bg-charcoal-900 dark:border-charcoal-700">
+        <nav
+          id="mobile-menu"
+          ref={menuRef}
+          aria-label="Mobile"
+          className="md:hidden border-t border-charcoal-100 bg-white dark:bg-charcoal-900 dark:border-charcoal-700"
+        >
           <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-body-lg py-2 min-h-[44px] flex items-center hover:text-forest-800 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-body-lg py-2 min-h-[44px] flex items-center hover:text-forest-800 transition-colors ${
+                    active ? 'text-forest-800 dark:text-forest-400 font-semibold' : ''
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </nav>
       )}

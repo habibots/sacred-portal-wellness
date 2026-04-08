@@ -83,7 +83,7 @@ export default function Home() {
               alt="Sacred Portal Wellness"
               width={220}
               height={220}
-              className="mx-auto mb-8 rounded-full"
+              className="mx-auto mb-8 rounded-full w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px]"
               priority
             />
             <h1 className="text-display font-display text-cream-50 mb-6">

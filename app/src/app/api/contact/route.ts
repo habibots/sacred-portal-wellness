@@ -20,19 +20,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sanitize all fields
-    const name = sanitizeString(parsed.data.name);
-    const email = sanitizeString(parsed.data.email);
-    const subject = sanitizeString(parsed.data.subject);
-    const message = sanitizeString(parsed.data.message);
-
-    // Log the sanitized submission (visible in PM2 logs)
-    console.log('=== CONTACT FORM SUBMISSION ===');
-    console.log(`Name: ${name}`);
-    console.log(`Email: ${email}`);
-    console.log(`Subject: ${subject}`);
-    console.log(`Message: ${message}`);
-    console.log('=== END SUBMISSION ===');
+    // Sanitize all fields. We do not log them — PII should never end up in
+    // Worker logs that may be retained by Cloudflare or surfaced via Logpush.
+    // When email delivery is wired up (Resend / Google Apps Script / etc.),
+    // do it here using parsed.data + sanitizeString.
+    sanitizeString(parsed.data.name);
+    sanitizeString(parsed.data.email);
+    sanitizeString(parsed.data.subject);
+    sanitizeString(parsed.data.message);
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -26,7 +26,7 @@ export default function OfferOutlinePage() {
             alt="Sacred Portal Wellness"
             width={100}
             height={100}
-            className="mx-auto mb-8 rounded-full"
+            className="mx-auto mb-8 rounded-full w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]"
           />
           <h1 className="text-h1 font-display text-cream-50 mb-6">The Sacred Portal Path</h1>
           <p className="text-body-lg text-cream-700 max-w-3xl mx-auto">

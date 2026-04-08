@@ -63,6 +63,8 @@ export function ContactForm() {
             id="name"
             type="text"
             required
+            aria-required="true"
+            autoComplete="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Your name"
@@ -76,6 +78,9 @@ export function ContactForm() {
             id="email"
             type="email"
             required
+            aria-required="true"
+            autoComplete="email"
+            inputMode="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="your@email.com"
@@ -91,6 +96,7 @@ export function ContactForm() {
           id="subject"
           type="text"
           required
+          aria-required="true"
           value={formData.subject}
           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
           placeholder="How can I help you?"
@@ -104,6 +110,7 @@ export function ContactForm() {
         <textarea
           id="message"
           required
+          aria-required="true"
           rows={5}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}

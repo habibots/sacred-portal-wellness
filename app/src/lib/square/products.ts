@@ -27,6 +27,26 @@ function slugify(name: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
+// Defense-in-depth: only render product images served from known-good
+// Square hostnames. If Square's catalog were ever populated with a malicious
+// image URL, the browser would still load it and could leak referrer/visit
+// data to an attacker-controlled server. Restricting to this allowlist
+// blocks that vector.
+const ALLOWED_IMAGE_HOSTS = new Set([
+  'items-images-production.s3.us-west-2.amazonaws.com',
+  'items-images-sandbox.s3.us-west-2.amazonaws.com',
+  'sacredportalwellness.square.site',
+]);
+
+function isAllowedImageUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' && ALLOWED_IMAGE_HOSTS.has(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Fetches the live product catalog from Square. Used by the shop list, the
  * individual product detail pages, and the sitemap. Errors propagate to the
@@ -47,7 +67,7 @@ export async function getProducts(): Promise<Product[]> {
       const variations = (data?.variations || []) as CatalogObject.ItemVariation[];
       const firstVariation = variations[0];
       const priceMoney = firstVariation?.itemVariationData?.priceMoney;
-      const images: string[] = data?.ecomImageUris || [];
+      const images: string[] = (data?.ecomImageUris || []).filter(isAllowedImageUrl);
 
       return {
         id: item.id,

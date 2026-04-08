@@ -88,6 +88,12 @@ export default function CheckoutPage() {
         throw new Error(data.error || 'Checkout failed');
       }
 
+      // Defense-in-depth: only follow https URLs from Square. Prevents
+      // javascript: or http: redirects if the upstream response is ever spoofed.
+      if (typeof data.checkoutUrl !== 'string' || !data.checkoutUrl.startsWith('https://')) {
+        throw new Error('Invalid checkout URL received from server');
+      }
+
       // Redirect to Square hosted checkout — cart is cleared on the success page
       window.location.href = data.checkoutUrl;
     } catch (error) {
@@ -124,11 +130,15 @@ export default function CheckoutPage() {
               <Input
                 id="zip-code"
                 type="text"
+                inputMode="numeric"
+                autoComplete="postal-code"
+                required
+                aria-required="true"
                 placeholder="e.g. 92101"
                 value={zipCode}
                 onChange={(e) => handleZipChange(e.target.value)}
                 maxLength={10}
-                className="max-w-[200px]"
+                className="w-full sm:max-w-[200px]"
                 error={!!zipError}
                 aria-describedby={zipError ? 'zip-error' : undefined}
               />
@@ -177,7 +187,7 @@ export default function CheckoutPage() {
 
         {/* Order Summary */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg p-6 shadow-md dark:bg-charcoal-800 sticky top-24">
+          <div className="bg-white rounded-lg p-6 shadow-md dark:bg-charcoal-800 lg:sticky lg:top-24">
             <h2 className="text-h5 font-display mb-4">Order Summary</h2>
 
             <div className="space-y-3 mb-6">
