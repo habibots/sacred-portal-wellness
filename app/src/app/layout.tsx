@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Sacred Portal Wellness",
   },
   description:
-    "Hand-crafted yoni steam herbs, salves, and yoni steam seats. Holistic nurse coaching for women's hormonal, cycle, digestive, and emotional wellness with Amber Rodriguez, RN, BSN, HNB-BC.",
+    "Hand-crafted yoni steam herbs, salves, and yoni steam seats. Holistic nurse coaching for women's hormonal, cycle, digestive, and emotional wellness with Amber, RN, BSN, HNB-BC.",
   keywords: [
     "yoni steaming",
     "yoni steam herbs",
@@ -48,10 +48,9 @@ export const metadata: Metadata = {
     "menstrual wellness",
     "postpartum healing",
     "Sacred Portal Wellness",
-    "Amber Rodriguez",
     "San Diego wellness",
   ],
-  authors: [{ name: "Amber Rodriguez" }],
+  authors: [{ name: "Amber" }],
   creator: "Sacred Portal Wellness",
   publisher: "Sacred Portal Wellness",
   alternates: {

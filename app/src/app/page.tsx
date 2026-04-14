@@ -12,7 +12,7 @@ const localBusinessJsonLd = {
   image: "https://sacredportalwellness.com/images/logo-wellness.png",
   founder: {
     "@type": "Person",
-    name: "Amber Rodriguez",
+    name: "Amber",
     jobTitle: "Registered Nurse, Holistic Health Coach",
     description: "RN, BSN, HNB-BC",
   },

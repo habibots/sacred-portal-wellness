@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getProductBySlug } from '@/lib/square/products';
 import { formatPrice } from '@/lib/utils/format';
 import { AddToCartButton } from './add-to-cart-button';
+import { ProductImageGallery } from '@/components/product/product-image-gallery';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -94,46 +94,7 @@ export default async function ProductPage({
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Image gallery */}
-        <div className="space-y-4">
-          {product.images.length > 0 ? (
-            <>
-              <div className="relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-lg overflow-hidden">
-                <Image
-                  src={product.images[0]}
-                  alt={`${product.name} — main product image`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  unoptimized
-                  priority
-                />
-              </div>
-              {product.images.length > 1 && (
-                <div className="grid grid-cols-4 gap-2">
-                  {product.images.slice(1, 5).map((img, i) => (
-                    <div
-                      key={img}
-                      className="relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-md overflow-hidden"
-                    >
-                      <Image
-                        src={img}
-                        alt={`${product.name} — additional view ${i + 2}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 25vw, 12vw"
-                        unoptimized
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-lg flex items-center justify-center">
-              <span className="text-charcoal-400">No image available</span>
-            </div>
-          )}
-        </div>
+        <ProductImageGallery images={product.images} name={product.name} />
 
         {/* Product details */}
         <div>
