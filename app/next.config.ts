@@ -68,6 +68,21 @@ const nextConfig: NextConfig = {
         source: '/(.*)',
         headers: securityHeaders,
       },
+      // Hashed static assets: safe to cache forever
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // Everything else (HTML pages, API, images in /public): force
+      // browsers + CDN to always revalidate, so deploys appear immediately
+      {
+        source: '/:path((?!_next/static/).*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate, s-maxage=0' },
+        ],
+      },
     ];
   },
 };
