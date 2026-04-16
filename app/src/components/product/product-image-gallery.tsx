@@ -43,6 +43,36 @@ export function ProductImageGallery({ images, name }: Props) {
     return () => el.removeEventListener('keydown', handleKey);
   }, [next, prev, hasMultiple]);
 
+  useEffect(() => {
+    const el = mainRef.current;
+    if (!el || !hasMultiple) return;
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      tracking = true;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+      if (dx < 0) next();
+      else prev();
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [next, prev, hasMultiple]);
+
   if (images.length === 0) {
     return (
       <div className="relative aspect-square bg-cream-600 dark:bg-charcoal-700 rounded-lg flex items-center justify-center">

@@ -67,7 +67,7 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-white border-b border-charcoal-100 dark:bg-charcoal-900 dark:border-charcoal-700">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 min-w-0">
             <div className="w-10 h-10 rounded-full overflow-hidden bg-forest-900 flex-shrink-0">
               <Image
                 src="/images/logo-main.jpeg"
@@ -78,7 +78,7 @@ export function Header() {
                 priority
               />
             </div>
-            <span className="text-h4 font-display text-forest-800 dark:text-forest-400">Sacred Portal</span>
+            <span className="text-h4 font-display text-forest-800 dark:text-forest-400 truncate">Sacred Portal</span>
           </Link>
 
           {/* Desktop nav */}
@@ -130,7 +130,7 @@ export function Header() {
           </nav>
 
           {/* Mobile: cart + hamburger */}
-          <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-4 md:hidden flex-shrink-0">
             <ThemeToggle />
             <Link
               href="/cart"
