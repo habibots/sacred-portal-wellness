@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const cspDirectives = [
   "default-src 'self'",
-  "script-src 'self' https://web.squarecdn.com https://sandbox.web.squarecdn.com",
+  "script-src 'self' 'unsafe-inline' https://web.squarecdn.com https://sandbox.web.squarecdn.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://items-images-production.s3.us-west-2.amazonaws.com https://items-images-sandbox.s3.us-west-2.amazonaws.com https://sacredportalwellness.square.site",
   "font-src 'self'",
